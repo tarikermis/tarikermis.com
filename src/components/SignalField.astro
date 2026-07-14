@@ -1,0 +1,36 @@
+<svg class="signal-field" viewBox="0 0 720 620" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="signal-gradient" x1="98" y1="84" x2="610" y2="536" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FA5617" />
+      <stop offset="1" stop-color="#EE0B74" />
+    </linearGradient>
+    <radialGradient id="signal-node" cx="0" cy="0" r="1" gradientTransform="translate(0.35 0.3) rotate(52) scale(0.95)">
+      <stop stop-color="#FF9A67" />
+      <stop offset="0.45" stop-color="#FA5617" />
+      <stop offset="1" stop-color="#EE0B74" />
+    </radialGradient>
+    <filter id="signal-glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="9" />
+    </filter>
+  </defs>
+
+  <g class="signal-field__paths" stroke="url(#signal-gradient)" stroke-width="1.25">
+    <path d="M92 198C189 111 271 157 340 232C423 322 495 220 608 134" />
+    <path d="M126 478C230 404 269 457 352 388C437 317 516 379 626 462" />
+    <path d="M194 82C246 182 237 274 340 312C447 352 489 442 484 552" />
+    <path d="M66 330C174 294 253 328 340 312C442 292 524 316 668 274" />
+  </g>
+
+  <g class="signal-field__nodes">
+    <circle cx="92" cy="198" r="9" fill="url(#signal-node)" />
+    <circle cx="194" cy="82" r="6" fill="url(#signal-node)" />
+    <circle cx="608" cy="134" r="7" fill="url(#signal-node)" />
+    <circle cx="668" cy="274" r="5" fill="url(#signal-node)" />
+    <circle cx="626" cy="462" r="9" fill="url(#signal-node)" />
+    <circle cx="484" cy="552" r="6" fill="url(#signal-node)" />
+    <circle cx="126" cy="478" r="7" fill="url(#signal-node)" />
+    <circle cx="66" cy="330" r="5" fill="url(#signal-node)" />
+    <circle cx="340" cy="312" r="12" fill="#18181B" />
+    <circle cx="340" cy="312" r="26" fill="#FA5617" opacity="0.14" filter="url(#signal-glow)" />
+  </g>
+</svg>

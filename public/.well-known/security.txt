@@ -1,0 +1,5 @@
+Contact: mailto:tarik@n3tz.ai
+Canonical: https://tarikermis.com/.well-known/security.txt
+Preferred-Languages: en, de
+Policy: https://github.com/tarikermis/tarikermis.com/security/policy
+Expires: 2027-07-15T23:59:59Z

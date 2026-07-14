@@ -1,0 +1,12 @@
+/* TEAM */
+Design, copy, and code: Tarik Ermis
+Location: Völklingen, Saarland, Germany
+Contact: tarik@n3tz.ai
+
+/* SITE */
+Canonical: https://tarikermis.com
+Stack: Astro, semantic HTML, modern CSS, TypeScript
+Hosting: Cloudflare Pages
+Languages: English, German
+Analytics: none
+Last update: 2026-07-15

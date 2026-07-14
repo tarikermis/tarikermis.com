@@ -1,0 +1,28 @@
+---
+import Icon from '@/components/Icon.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+Astro.response.status = 404;
+---
+
+<BaseLayout
+  lang="en"
+  title="Not found — Tarik Ermis"
+  description="This path does not exist. Return to the personal website and selected software work of Tarik Ermis."
+  path="/404/"
+  noindex
+>
+  <main id="main" class="not-found">
+    <div class="not-found__signal" aria-hidden="true"><i></i><i></i><i></i></div>
+    <a class="wordmark" href="/" aria-label="te. Tarik Ermis — home">
+      <span class="wordmark__mark" aria-hidden="true">te<span>.</span></span>
+      <span class="wordmark__name">Tarik Ermis</span>
+    </a>
+    <div>
+      <p class="eyebrow">404 · Signal lost</p>
+      <h1>This path went somewhere else.</h1>
+      <p>The useful parts are still one click away.</p>
+      <a class="button button--primary" href="/">Back home <Icon name="arrow" size={18} /></a>
+    </div>
+  </main>
+</BaseLayout>

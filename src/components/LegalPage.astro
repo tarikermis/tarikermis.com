@@ -1,0 +1,138 @@
+---
+import type { Locale } from '@/data/content';
+import { profile } from '@/data/content';
+import Icon from './Icon.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const de = locale === 'de';
+const home = de ? '/de/' : '/';
+const alternate = de ? '/legal/' : '/de/impressum/';
+---
+
+<div class="legal-page">
+  <header class="legal-header">
+    <div class="legal-shell">
+      <a class="wordmark" href={home} aria-label={de ? 'te. Tarik Ermis — Startseite' : 'te. Tarik Ermis — home'}>
+        <span class="wordmark__mark" aria-hidden="true">te<span>.</span></span>
+        <span class="wordmark__name">Tarik Ermis</span>
+      </a>
+      <div>
+        <a href={alternate} hreflang={de ? 'en' : 'de'}>{de ? 'EN' : 'DE'}</a>
+        <a href={home}>{de ? 'Zur Startseite' : 'Back home'} <Icon name="arrow" size={17} /></a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="legal-shell legal-main">
+    <header class="legal-hero">
+      <p class="eyebrow">{de ? 'Das Notwendige, klar gesagt' : 'The necessary details, clearly stated'}</p>
+      <h1>{de ? 'Impressum & Datenschutz' : 'Legal notice & privacy'}</h1>
+      <p>{de
+        ? 'Diese Seite enthält die Anbieterangaben nach deutschem Recht und erklärt, welche Daten diese Website verarbeitet.'
+        : 'This page contains the provider information required under German law and explains what data this website processes.'}</p>
+      <span>{de ? 'Stand: 15. Juli 2026' : 'Last updated: July 15, 2026'}</span>
+    </header>
+
+    <div class="legal-layout">
+      <aside class="legal-toc" aria-label={de ? 'Inhalt' : 'Contents'}>
+        <span>{de ? 'Auf dieser Seite' : 'On this page'}</span>
+        <nav>
+          <a href="#provider">{de ? 'Anbieter' : 'Provider'}</a>
+          <a href="#content">{de ? 'Inhaltlich verantwortlich' : 'Content responsibility'}</a>
+          <a href="#disputes">{de ? 'Streitbeilegung' : 'Dispute resolution'}</a>
+          <a href="#privacy">{de ? 'Datenschutz' : 'Privacy'}</a>
+          <a href="#rights">{de ? 'Ihre Rechte' : 'Your rights'}</a>
+        </nav>
+      </aside>
+
+      <div class="legal-content">
+        <section id="provider">
+          <span class="legal-content__number">01</span>
+          <h2>{de ? 'Angaben gemäß § 5 DDG' : 'Provider information under § 5 DDG'}</h2>
+          <address>
+            <strong>n3tz · Tarik Ermis</strong><br />
+            Kaiserstr. 27<br />
+            66333 Völklingen<br />
+            {de ? 'Deutschland' : 'Germany'}
+          </address>
+          <dl>
+            <div><dt>{de ? 'E-Mail' : 'Email'}</dt><dd><a href={`mailto:${profile.email}`}>{profile.email}</a></dd></div>
+            <div><dt>{de ? 'Telefon' : 'Phone'}</dt><dd><a href="tel:+4968984989977">+49 6898 4989977</a></dd></div>
+            <div><dt>{de ? 'USt-IdNr.' : 'VAT ID'}</dt><dd>DE351837941</dd></div>
+          </dl>
+        </section>
+
+        <section id="content">
+          <span class="legal-content__number">02</span>
+          <h2>{de ? 'Verantwortlich für den Inhalt' : 'Responsible for editorial content'}</h2>
+          <p>{de ? 'Verantwortlich gemäß § 18 Abs. 2 MStV:' : 'Responsible under § 18 para. 2 MStV:'}</p>
+          <address>Tarik Ermis · Kaiserstr. 27 · 66333 Völklingen</address>
+          <p>{de
+            ? 'Trotz sorgfältiger Prüfung übernehme ich keine Verantwortung für Inhalte externer Websites. Für verlinkte Inhalte sind ausschließlich deren Betreiber verantwortlich.'
+            : 'Although external links are checked with care, I do not control or assume responsibility for third-party content. The respective operators are responsible for linked pages.'}</p>
+        </section>
+
+        <section id="disputes">
+          <span class="legal-content__number">03</span>
+          <h2>{de ? 'Verbraucherstreitbeilegung' : 'Consumer dispute resolution'}</h2>
+          <p>{de
+            ? 'Ich bin weder bereit noch verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.'
+            : 'I am neither willing nor required to participate in dispute resolution proceedings before a consumer arbitration body.'}</p>
+        </section>
+
+        <section id="privacy">
+          <span class="legal-content__number">04</span>
+          <h2>{de ? 'Datenschutzerklärung' : 'Privacy notice'}</h2>
+          <h3>{de ? 'Verantwortlicher' : 'Controller'}</h3>
+          <p>{de
+            ? `Verantwortlich für die Verarbeitung ist Tarik Ermis, erreichbar unter ${profile.email}.`
+            : `The controller is Tarik Ermis, reachable at ${profile.email}.`}</p>
+
+          <h3>{de ? 'Hosting und Bereitstellung' : 'Hosting and delivery'}</h3>
+          <p>{de
+            ? 'Diese Website wird über Cloudflare Pages bereitgestellt. Beim Aufruf verarbeitet Cloudflare technisch erforderliche Verbindungsdaten – insbesondere IP-Adresse, Zeitpunkt, angeforderte Ressource, Referrer sowie Browser- und Geräteangaben –, um die Seite auszuliefern und gegen Angriffe zu schützen.'
+            : 'This website is delivered through Cloudflare Pages. When you visit, Cloudflare processes technically necessary connection data—particularly IP address, timestamp, requested resource, referrer, browser, and device information—to deliver and protect the site.'}</p>
+          <p>{de
+            ? 'Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO: das berechtigte Interesse an einer sicheren, schnellen und zuverlässigen Website. Cloudflare, Inc. ist Empfänger bzw. Auftragsverarbeiter. Daten können weltweit verarbeitet werden; für Übermittlungen in die USA stützt sich Cloudflare unter anderem auf das EU-US Data Privacy Framework und Standardvertragsklauseln.'
+            : 'The legal basis is Art. 6(1)(f) GDPR: the legitimate interest in a secure, fast, and reliable website. Cloudflare, Inc. acts as recipient and processor. Data may be processed globally; for transfers to the United States, Cloudflare relies in part on the EU–US Data Privacy Framework and Standard Contractual Clauses.'}</p>
+          <p><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">Cloudflare Privacy Policy <Icon name="external" size={15} /></a></p>
+
+          <h3>{de ? 'Keine Analyse, keine Cookies' : 'No analytics, no cookies'}</h3>
+          <p>{de
+            ? 'Diese Website setzt keine Analyse- oder Marketingdienste ein, lädt keine Werbenetzwerke und speichert keine Cookies oder Tracking-Kennungen. Die kleinen Interaktionen der Seite laufen lokal in Ihrem Browser.'
+            : 'This website uses no analytics or marketing services, loads no advertising networks, and stores no cookies or tracking identifiers. Its small interactions run locally in your browser.'}</p>
+
+          <h3>{de ? 'Kontaktaufnahme' : 'Contact'}</h3>
+          <p>{de
+            ? 'Wenn Sie mir eine E-Mail senden, verarbeite ich Ihre Nachricht und Kontaktdaten, um zu antworten. Je nach Anliegen beruht dies auf Art. 6 Abs. 1 lit. b oder lit. f DSGVO. Die Daten werden gelöscht, sobald sie für den Zweck nicht mehr benötigt werden und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.'
+            : 'If you email me, I process your message and contact details in order to reply. Depending on the request, this is based on Art. 6(1)(b) or (f) GDPR. The data is deleted when no longer needed for that purpose, unless statutory retention duties apply.'}</p>
+
+          <h3>vCard</h3>
+          <p>{de
+            ? 'Die angebotene vCard ist eine statische Datei mit meinen geschäftlichen Kontaktdaten. Beim Download werden außer den üblichen Abrufdaten keine zusätzlichen Daten erhoben.'
+            : 'The downloadable vCard is a static file containing my business contact details. Other than the normal request data, downloading it does not collect additional information.'}</p>
+        </section>
+
+        <section id="rights">
+          <span class="legal-content__number">05</span>
+          <h2>{de ? 'Ihre Datenschutzrechte' : 'Your privacy rights'}</h2>
+          <p>{de
+            ? 'Sie haben – soweit die jeweiligen Voraussetzungen vorliegen – Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch. Sie können außerdem Beschwerde bei einer Datenschutzaufsichtsbehörde einlegen. Zur Ausübung Ihrer Rechte genügt eine E-Mail.'
+            : 'Where the relevant conditions are met, you have rights to access, correction, erasure, restriction, portability, and objection. You may also lodge a complaint with a data-protection authority. To exercise your rights, simply send an email.'}</p>
+          <a class="button button--primary" href={`mailto:${profile.email}`}><Icon name="mail" size={18} /> {profile.email}</a>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="legal-footer">
+    <div class="legal-shell">
+      <span>© 2026 Tarik Ermis</span>
+      <a href={home}>{de ? 'Zurück zu tarikermis.com' : 'Back to tarikermis.com'}</a>
+    </div>
+  </footer>
+</div>

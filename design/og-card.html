@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      @font-face { font-family: Poppins; src: url('../public/assets/fonts/poppins-400.woff2'); font-weight: 400; }
+      @font-face { font-family: Poppins; src: url('../public/assets/fonts/poppins-600.woff2'); font-weight: 600; }
+      * { box-sizing: border-box; }
+      html, body { width: 1200px; height: 630px; margin: 0; overflow: hidden; }
+      body {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1.15fr .7fr;
+        align-items: center;
+        gap: 55px;
+        padding: 70px 80px;
+        background: #fffaf5;
+        color: #09090b;
+        font-family: Poppins, Arial, sans-serif;
+      }
+      body::before {
+        position: absolute; inset: auto -120px -180px auto; width: 560px; height: 560px;
+        border-radius: 50%; background: radial-gradient(circle at 35% 35%, rgba(250,86,23,.3), rgba(238,11,116,.13) 42%, transparent 68%); content: '';
+      }
+      .mark { display: flex; align-items: center; gap: 15px; margin-bottom: 45px; font-size: 18px; font-weight: 600; }
+      .dotmark { display: grid; width: 48px; height: 48px; place-items: center; border: 1px solid #ddd4cc; border-radius: 50%; background: #fff; font-size: 14px; letter-spacing: -1px; }
+      .dotmark i { color: #fa5617; font-style: normal; }
+      .kicker { margin: 0 0 16px; color: #c83c00; font-size: 14px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
+      h1 { width: 710px; margin: 0; font-size: 65px; font-weight: 600; letter-spacing: -4.4px; line-height: 1.02; }
+      h1 span { background: linear-gradient(90deg,#c83c00,#fa5617 50%,#b40a5a); background-clip: text; color: transparent; }
+      p { width: 640px; margin: 26px 0 0; color: #52525b; font-size: 19px; line-height: 1.55; }
+      .portrait { position: relative; z-index: 2; width: 335px; height: 440px; overflow: hidden; border: 8px solid #fff; border-radius: 150px 150px 28px 28px; box-shadow: 0 28px 80px rgba(39,22,13,.18); }
+      .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+      .node { position: absolute; z-index: 3; right: 58px; bottom: 60px; width: 45px; height: 45px; border: 8px solid #fffaf5; border-radius: 50%; background: linear-gradient(135deg,#fa5617,#ee0b74); }
+      .url { position: absolute; right: 80px; bottom: 28px; color: #71717a; font: 13px ui-monospace, monospace; }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div class="mark"><span class="dotmark">te<i>.</i></span> Tarik Ermis</div>
+      <div class="kicker">Software architect · AI engineer · Founder</div>
+      <h1>Difficult ideas.<br /><span>Beautifully simple software.</span></h1>
+      <p>Production AI systems and full-stack products — from real-time voice agents to the infrastructure behind them.</p>
+    </div>
+    <div class="portrait"><img src="../public/assets/tarik-portrait.webp" alt="" /></div>
+    <i class="node"></i>
+    <div class="url">tarikermis.com</div>
+  </body>
+</html>

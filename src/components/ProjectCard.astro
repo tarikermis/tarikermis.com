@@ -1,0 +1,50 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  project: {
+    number: string;
+    eyebrow: string;
+    title: string;
+    description: string;
+    owned: string;
+    tags: string[];
+    links: Array<{ label: string; href: string }>;
+    featured?: boolean;
+  };
+  builtLabel: string;
+  tagsLabel: string;
+}
+
+const { project, builtLabel, tagsLabel } = Astro.props;
+---
+
+<article class:list={['project-card', { 'project-card--featured': project.featured }]} data-reveal>
+  <div class="project-card__topline">
+    <span class="project-card__number">{project.number}</span>
+    <span class="project-card__eyebrow">{project.eyebrow}</span>
+  </div>
+
+  <div class="project-card__body">
+    <h3>{project.title}</h3>
+    <p class="project-card__description">{project.description}</p>
+
+    <div class="project-card__owned">
+      <span>{builtLabel}</span>
+      <p>{project.owned}</p>
+    </div>
+
+    <ul class="tag-list" aria-label={tagsLabel}>
+      {project.tags.map((tag) => <li>{tag}</li>)}
+    </ul>
+  </div>
+
+  <div class="project-card__links">
+    {project.links.map((link) => (
+      <a href={link.href} target="_blank" rel="noopener noreferrer">
+        {link.label}
+        <Icon name="external" size={17} />
+      </a>
+    ))}
+  </div>
+</article>

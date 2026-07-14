@@ -1,0 +1,27 @@
+# Tarik Ermis
+
+> Personal website and selected work of Tarik Ermis, a software architect, AI engineer, and founder based in Völklingen, Germany.
+
+Canonical website: https://tarikermis.com
+German version: https://tarikermis.com/de/
+Résumé: https://techrez.io/resume/tarik-ermis
+GitHub: https://github.com/tarikermis
+LinkedIn: https://www.linkedin.com/in/tarikermis
+Company: https://n3tz.ai
+Contact: mailto:tarik@n3tz.ai
+vCard: https://tarikermis.com/contact.vcf
+
+## Focus
+
+- Production conversational AI, RAG, and multi-agent systems
+- Full-stack product engineering across web, mobile, APIs, and data
+- Cloud infrastructure, containers, infrastructure as code, and operations
+- Founder and software architect of n3tz and its AI receptionist product, Empfang
+
+## Selected work
+
+- Empfang by n3tz: real-time AI receptionist for phone and web
+- Enterprise AI systems: document intelligence, retrieval, and agent orchestration
+- Commerce platforms: multi-role marketplaces, payments, localization, realtime order tracking, and performance
+
+This site uses no analytics, advertising, or tracking cookies.

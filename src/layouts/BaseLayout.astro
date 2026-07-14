@@ -1,0 +1,109 @@
+---
+import '@/styles/global.css';
+
+interface Props {
+  lang: 'en' | 'de';
+  title: string;
+  description: string;
+  path: string;
+  alternatePath?: string;
+  noindex?: boolean;
+  profilePage?: boolean;
+  skipLabel?: string;
+}
+
+const {
+  lang,
+  title,
+  description,
+  path,
+  alternatePath,
+  noindex = false,
+  profilePage = false,
+  skipLabel = 'Skip to content',
+} = Astro.props;
+const canonical = new URL(path, Astro.site);
+const alternate = alternatePath ? new URL(alternatePath, Astro.site) : undefined;
+const locale = lang === 'de' ? 'de_DE' : 'en_US';
+const pageSchema = profilePage ? {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  url: canonical.href,
+  mainEntity: {
+    '@type': 'Person',
+    name: 'Tarik Ermis',
+    url: 'https://tarikermis.com',
+    image: 'https://tarikermis.com/assets/tarik-wide.webp',
+    jobTitle: 'Software Architect, AI Engineer & Founder',
+    worksFor: { '@type': 'Organization', name: 'n3tz', url: 'https://n3tz.ai' },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Völklingen',
+      addressRegion: 'Saarland',
+      addressCountry: 'DE',
+    },
+    knowsLanguage: ['de', 'en', 'tr', 'fr'],
+    knowsAbout: ['Artificial intelligence', 'Software architecture', 'Product engineering', 'Cloud infrastructure'],
+    sameAs: [
+      'https://github.com/tarikermis',
+      'https://www.linkedin.com/in/tarikermis',
+      'https://techrez.io/resume/tarik-ermis',
+      'https://n3tz.ai',
+    ],
+  },
+} : {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  url: canonical.href,
+  name: title,
+  description,
+  inLanguage: lang,
+};
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fffaf5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Tarik Ermis" />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang={lang} href={canonical} />
+    {alternate && <link rel="alternate" hreflang={lang === 'de' ? 'en' : 'de'} href={alternate} />}
+    {alternate && <link rel="alternate" hreflang="x-default" href={lang === 'en' ? canonical : alternate} />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preload" href="/assets/fonts/poppins-600.woff2" as="font" type="font/woff2" crossorigin />
+
+    <meta property="og:type" content={profilePage ? 'profile' : 'website'} />
+    <meta property="og:locale" content={locale} />
+    <meta property="og:site_name" content="Tarik Ermis" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content="https://tarikermis.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Tarik Ermis — software architect, AI engineer and founder" />
+    {profilePage && <meta property="profile:first_name" content="Tarik" />}
+    {profilePage && <meta property="profile:last_name" content="Ermis" />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://tarikermis.com/og-image.png" />
+
+    {!noindex && <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{skipLabel}</a>
+    <slot />
+  </body>
+</html>

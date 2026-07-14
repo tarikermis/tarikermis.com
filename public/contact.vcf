@@ -1,0 +1,16 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Ermis;Tarik;;;
+FN:Tarik Ermis
+ORG:n3tz
+TITLE:Software Architect & Founder
+EMAIL;TYPE=INTERNET,WORK:tarik@n3tz.ai
+TEL;TYPE=CELL,VOICE:+4915737532227
+ADR;TYPE=WORK:;;;Völklingen;;66333;Germany
+URL;TYPE=HOME:https://tarikermis.com
+URL;TYPE=WORK:https://n3tz.ai
+X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/tarikermis
+X-SOCIALPROFILE;TYPE=github:https://github.com/tarikermis
+NOTE:AI engineer and full-stack product builder based in Saarland\, Germany.
+REV:20260715T000000Z
+END:VCARD

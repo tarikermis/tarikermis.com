@@ -1,0 +1,19 @@
+---
+import HomePage from '@/components/HomePage.astro';
+import { copy } from '@/data/content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const c = copy.de;
+---
+
+<BaseLayout
+  lang="de"
+  title={c.seo.title}
+  description={c.seo.description}
+  path={c.path}
+  alternatePath={c.alternatePath}
+  profilePage
+  skipLabel="Zum Inhalt springen"
+>
+  <HomePage locale="de" />
+</BaseLayout>

@@ -1,0 +1,27 @@
+{
+  "name": "tarikermis.com",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The personal site and selected work of software architect Tarik Ermis.",
+  "type": "module",
+  "packageManager": "yarn@1.22.22",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && node scripts/check-site.mjs",
+    "preview": "astro preview",
+    "check": "astro build && node scripts/check-site.mjs",
+    "cf:dev": "yarn build && wrangler pages dev dist",
+    "deploy": "yarn build && wrangler pages deploy dist --project-name=tarikermis --branch=main"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "7.0.2"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "wrangler": "4.110.0"
+  }
+}

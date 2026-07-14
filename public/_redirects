@@ -1,0 +1,9 @@
+# Helpful short paths. Cross-domain canonical redirects live in Cloudflare
+# Redirect Rules, not here; see docs/cloudflare-setup.md.
+/resume    https://techrez.io/resume/tarik-ermis       302
+/github    https://github.com/tarikermis                302
+/linkedin  https://www.linkedin.com/in/tarikermis       302
+/vcard     /contact.vcf                                 301
+/imprint   /de/impressum/                               301
+/impressum /de/impressum/                               301
+/privacy   /legal/#privacy                              301

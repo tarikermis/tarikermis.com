@@ -1,0 +1,340 @@
+---
+import type { Locale } from '@/data/content';
+import { copy, profile } from '@/data/content';
+import Icon from './Icon.astro';
+import ProjectCard from './ProjectCard.astro';
+import SignalField from './SignalField.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = copy[locale];
+const legalHref = locale === 'de' ? '/de/impressum/' : '/legal/';
+---
+
+<div class="site-page" data-locale={locale}>
+  <header class="site-header" data-header>
+    <div class="site-header__inner">
+      <a class="wordmark" href={c.path} aria-label={locale === 'de' ? 'te. Tarik Ermis — Startseite' : 'te. Tarik Ermis — home'}>
+        <span class="wordmark__mark" aria-hidden="true">te<span>.</span></span>
+        <span class="wordmark__name">Tarik Ermis</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label={locale === 'de' ? 'Hauptnavigation' : 'Primary navigation'}>
+        <a href="#work">{c.nav.work}</a>
+        <a href="#approach">{c.nav.approach}</a>
+        <a href="#about">{c.nav.about}</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="language-link" href={c.alternatePath} hreflang={locale === 'de' ? 'en' : 'de'} lang={locale === 'de' ? 'en' : 'de'}>
+          {c.alternateLabel}
+        </a>
+        <button class="link-button" type="button" data-links-open aria-haspopup="dialog" aria-controls="quick-links">
+          {c.nav.links}
+          <span aria-hidden="true">↗</span>
+        </button>
+        <a class="header-hello" href={`mailto:${profile.email}`}>
+          {c.nav.hello}
+          <Icon name="arrow" size={17} />
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero section-shell" id="top" aria-labelledby="hero-title">
+      <div class="hero__wash" aria-hidden="true"></div>
+      <SignalField />
+
+      <div class="hero__content" data-reveal>
+        <p class="eyebrow hero__eyebrow">
+          <span class="status-dot" aria-hidden="true"></span>
+          {c.hero.eyebrow}
+        </p>
+
+        <h1 id="hero-title">
+          {c.hero.titleStart}
+          <span>{c.hero.titleAccent}</span>
+          {c.hero.titleEnd}
+        </h1>
+
+        <p class="hero__intro">{c.hero.intro}</p>
+        <p class="hero__signature">“{c.hero.signature}”</p>
+
+        <div class="hero__actions">
+          <a class="button button--primary" href={`mailto:${profile.email}`}>
+            <Icon name="mail" size={19} />
+            {c.hero.email}
+          </a>
+          <a class="button button--secondary" href="/contact.vcf" download="Tarik-Ermis.vcf">
+            <Icon name="download" size={19} />
+            {c.hero.vcard}
+          </a>
+        </div>
+
+        <dl class="hero__metrics">
+          {c.hero.metrics.map((metric) => (
+            <div>
+              <dt>{metric.value}</dt>
+              <dd>{metric.label}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+
+      <div class="portrait-stage" data-reveal>
+        <div class="portrait-stage__halo" aria-hidden="true"></div>
+        <figure class="portrait-card">
+          <div class="portrait-card__image-wrap">
+            <img
+              src="/assets/tarik-portrait.webp"
+              alt={c.hero.portraitAlt}
+              width="941"
+              height="1637"
+              fetchpriority="high"
+            />
+            <div class="portrait-card__grain" aria-hidden="true"></div>
+          </div>
+          <figcaption>
+            <span><Icon name="location" size={16} /> Völklingen · Saarland</span>
+            <span>DE / EN / TR / FR</span>
+          </figcaption>
+        </figure>
+
+        <aside class="now-card" aria-label={c.hero.now}>
+          <div class="now-card__header">
+            <span>{c.hero.now}</span>
+            <span class="live-pill"><i aria-hidden="true"></i> live</span>
+          </div>
+          <dl>
+            <div>
+              <dt>{c.hero.building}</dt>
+              <dd><a href="https://n3tz.ai/empfang/" target="_blank" rel="noopener noreferrer">{c.hero.buildingValue}</a></dd>
+            </div>
+            <div>
+              <dt>{c.hero.focus}</dt>
+              <dd>{c.hero.focusValue}</dd>
+            </div>
+            <div>
+              <dt>{c.hero.localTime}</dt>
+              <dd data-local-time>—:—</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+
+      <a class="scroll-cue" href="#work" aria-label={`Scroll to ${c.nav.work}`}>
+        <span aria-hidden="true"></span>
+        {c.nav.work}
+      </a>
+    </section>
+
+    <section class="work-section" id="work" aria-labelledby="work-title">
+      <div class="work-section__glow" aria-hidden="true"></div>
+      <div class="section-shell">
+        <header class="section-heading section-heading--dark" data-reveal>
+          <div>
+            <p class="eyebrow">{c.work.kicker}</p>
+            <h2 id="work-title">{c.work.title}</h2>
+          </div>
+          <div class="section-heading__copy">
+            <p>{c.work.intro}</p>
+            <span>{c.work.caveat}</span>
+          </div>
+        </header>
+
+        <div class="project-grid">
+          {c.work.projects.map((project) => (
+            <ProjectCard
+              project={project}
+              builtLabel={c.work.built}
+              tagsLabel={locale === 'de' ? 'Technologien und Themen' : 'Technologies and themes'}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="approach-section section-shell" id="approach" aria-labelledby="approach-title">
+      <header class="section-heading" data-reveal>
+        <div>
+          <p class="eyebrow">{c.approach.kicker}</p>
+          <h2 id="approach-title">{c.approach.title}</h2>
+        </div>
+        <div class="section-heading__copy">
+          <p>{c.approach.intro}</p>
+        </div>
+      </header>
+
+      <div class="approach-grid">
+        {c.approach.items.map((item) => (
+          <article class="approach-card" data-reveal>
+            <div class="approach-card__number">{item.number}</div>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+            <span>{item.tools}</span>
+          </article>
+        ))}
+      </div>
+
+      <div class="stack-marquee" role="group" aria-label={locale === 'de' ? 'Ausgewählte Technologien' : 'Selected technologies'} data-reveal>
+        <div>
+          <span>Python</span><i></i><span>TypeScript</span><i></i><span>React</span><i></i><span>Vue</span><i></i><span>Astro</span><i></i><span>Node.js</span><i></i><span>PostgreSQL</span><i></i><span>Docker</span><i></i><span>Terraform</span><i></i><span>Cloudflare</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section" id="about" aria-labelledby="about-title">
+      <div class="section-shell about-section__grid">
+        <div class="about-copy" data-reveal>
+          <p class="eyebrow">{c.about.kicker}</p>
+          <h2 id="about-title">{c.about.title}</h2>
+          {c.about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+
+          <div class="language-list">
+            <span>{c.about.languagesLabel}</span>
+            <ul>
+              {c.about.languages.map((language) => <li>{language}</li>)}
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-panel" data-reveal>
+          <p class="timeline-panel__label">{c.about.timelineLabel}</p>
+          <ol>
+            {c.about.timeline.map((entry) => (
+              <li>
+                <span class="timeline-panel__period">{entry.period}</span>
+                <div>
+                  <strong>{entry.role}</strong>
+                  <span>{entry.company}</span>
+                </div>
+              </li>
+            ))}
+          </ol>
+          <a href={profile.resume} target="_blank" rel="noopener noreferrer">
+            {locale === 'de' ? 'Vollständiger Lebenslauf' : 'Full résumé'}
+            <Icon name="external" size={17} />
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section section-shell" id="contact" aria-labelledby="contact-title">
+      <div class="contact-card" data-reveal>
+        <div class="contact-card__signal" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <div class="contact-card__copy">
+          <p class="eyebrow">{c.contact.kicker}</p>
+          <h2 id="contact-title">{c.contact.title}</h2>
+          <p>{c.contact.text}</p>
+          <div class="contact-card__actions">
+            <a class="button button--light" href={`mailto:${profile.email}`}>
+              <Icon name="mail" size={19} />
+              {c.contact.email}
+            </a>
+            <button
+              class="button button--ghost-light"
+              type="button"
+              data-copy-email={profile.email}
+              data-default-label={c.contact.copyEmail}
+              data-copied-label={c.contact.copied}
+            >
+              <Icon name="copy" size={19} />
+              <span>{c.contact.copyEmail}</span>
+            </button>
+          </div>
+          <a class="contact-card__email" href={`mailto:${profile.email}`}>{profile.email}</a>
+        </div>
+
+        <div class="contact-card__qr">
+          <div class="qr-frame">
+            <img src="/contact-qr.svg" width="176" height="176" alt={c.contact.scan} loading="lazy" />
+          </div>
+          <span>{c.contact.scan}</span>
+          <a href="/contact.vcf" download="Tarik-Ermis.vcf">
+            {c.contact.vcard}
+            <Icon name="download" size={16} />
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="section-shell site-footer__inner">
+      <div>
+        <a class="wordmark wordmark--footer" href={c.path} aria-label={locale === 'de' ? 'te. Tarik Ermis — Startseite' : 'te. Tarik Ermis — home'}>
+          <span class="wordmark__mark" aria-hidden="true">te<span>.</span></span>
+          <span class="wordmark__name">Tarik Ermis</span>
+        </a>
+        <p>{c.footer.note}</p>
+      </div>
+
+      <nav aria-label={locale === 'de' ? 'Fußnavigation' : 'Footer navigation'}>
+        <a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href={profile.resume} target="_blank" rel="noopener noreferrer">Résumé</a>
+        <a href={legalHref}>{c.footer.legal}</a>
+        <a href="https://github.com/tarikermis/tarikermis.com" target="_blank" rel="noopener noreferrer">{c.footer.source}</a>
+        <a href={c.alternatePath} hreflang={locale === 'de' ? 'en' : 'de'}>{c.footer.language}</a>
+      </nav>
+
+      <div class="site-footer__bottom">
+        <span>© <span data-year>2026</span> Tarik Ermis</span>
+        <span><i aria-hidden="true"></i> Völklingen, {locale === 'de' ? 'Deutschland' : 'Germany'}</span>
+      </div>
+    </div>
+  </footer>
+
+  <dialog class="quick-links" id="quick-links" aria-labelledby="quick-links-title">
+    <div class="quick-links__topline">
+      <div>
+        <span>TE / LINKS</span>
+        <h2 id="quick-links-title">{c.quick.title}</h2>
+      </div>
+      <button type="button" data-links-close aria-label={c.quick.close}>
+        <Icon name="close" size={22} />
+      </button>
+    </div>
+    <p>{c.quick.intro}</p>
+    <div class="quick-links__grid">
+      <a href={profile.github} target="_blank" rel="noopener noreferrer">
+        <Icon name="github" />
+        <span><strong>GitHub</strong><small>@tarikermis</small></span>
+        <Icon name="external" size={17} />
+      </a>
+      <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">
+        <Icon name="linkedin" />
+        <span><strong>LinkedIn</strong><small>/in/tarikermis</small></span>
+        <Icon name="external" size={17} />
+      </a>
+      <a href={profile.resume} target="_blank" rel="noopener noreferrer">
+        <Icon name="external" />
+        <span><strong>Résumé</strong><small>{locale === 'de' ? 'TechRez-Profil' : 'TechRez profile'}</small></span>
+        <Icon name="external" size={17} />
+      </a>
+      <a href={profile.n3tz} target="_blank" rel="noopener noreferrer">
+        <span class="quick-links__n3tz" aria-hidden="true">n3tz</span>
+        <span><strong>n3tz</strong><small>{locale === 'de' ? 'Woran ich baue' : 'What I’m building'}</small></span>
+        <Icon name="external" size={17} />
+      </a>
+      <a href={`mailto:${profile.email}`}>
+        <Icon name="mail" />
+        <span><strong>Email</strong><small>{profile.email}</small></span>
+        <Icon name="arrow" size={17} />
+      </a>
+      <a href="/contact.vcf" download="Tarik-Ermis.vcf">
+        <Icon name="download" />
+        <span><strong>vCard</strong><small>{locale === 'de' ? 'Kontakt speichern' : 'Save contact'}</small></span>
+        <Icon name="download" size={17} />
+      </a>
+    </div>
+  </dialog>
+</div>
+
+<script src="../scripts/site.ts"></script>
