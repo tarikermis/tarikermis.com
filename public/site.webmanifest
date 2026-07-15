@@ -4,10 +4,11 @@
   "description": "Software architect, AI engineer, and founder.",
   "start_url": "/",
   "display": "standalone",
+  "scope": "/",
   "background_color": "#fffaf5",
   "theme_color": "#fa5617",
   "icons": [
-    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
   ]
 }

@@ -23,8 +23,8 @@
         border-radius: 50%; background: radial-gradient(circle at 35% 35%, rgba(250,86,23,.3), rgba(238,11,116,.13) 42%, transparent 68%); content: '';
       }
       .mark { display: flex; align-items: center; gap: 15px; margin-bottom: 45px; font-size: 18px; font-weight: 600; }
-      .dotmark { display: grid; width: 48px; height: 48px; place-items: center; border: 1px solid #ddd4cc; border-radius: 50%; background: #fff; font-size: 14px; letter-spacing: -1px; }
-      .dotmark i { color: #fa5617; font-style: normal; }
+      .dotmark { display: grid; width: 48px; height: 48px; place-items: center; padding: 6px; border: 1px solid #ddd4cc; border-radius: 50%; background: #fff; }
+      .dotmark img { width: 100%; height: 100%; object-fit: contain; }
       .kicker { margin: 0 0 16px; color: #c83c00; font-size: 14px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
       h1 { width: 710px; margin: 0; font-size: 65px; font-weight: 600; letter-spacing: -4.4px; line-height: 1.02; }
       h1 span { background: linear-gradient(90deg,#c83c00,#fa5617 50%,#b40a5a); background-clip: text; color: transparent; }
@@ -37,7 +37,7 @@
   </head>
   <body>
     <div>
-      <div class="mark"><span class="dotmark">te<i>.</i></span> Tarik Ermis</div>
+      <div class="mark"><span class="dotmark"><img src="../public/assets/n3tz-mark.svg" alt="" /></span> Tarik Ermis</div>
       <div class="kicker">Software architect · AI engineer · Founder</div>
       <h1>Difficult ideas.<br /><span>Beautifully simple software.</span></h1>
       <p>Production AI systems and full-stack products — from real-time voice agents to the infrastructure behind them.</p>

@@ -20,6 +20,12 @@ const { project, builtLabel, tagsLabel } = Astro.props;
 ---
 
 <article class:list={['project-card', { 'project-card--featured': project.featured }]} data-reveal>
+  {project.featured && (
+    <div class="project-card__signal" aria-hidden="true">
+      <img src="/assets/n3tz-mark.svg" alt="" width="1000" height="1000" loading="lazy" />
+    </div>
+  )}
+
   <div class="project-card__topline">
     <span class="project-card__number">{project.number}</span>
     <span class="project-card__eyebrow">{project.eyebrow}</span>

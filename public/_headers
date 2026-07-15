@@ -13,7 +13,7 @@
 /assets/*
   Cache-Control: public, max-age=604800, stale-while-revalidate=86400
 
-/favicon.svg
+/assets/n3tz-mark.svg
   Cache-Control: public, max-age=86400
 
 /og-image.png

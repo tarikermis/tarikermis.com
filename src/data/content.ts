@@ -44,12 +44,6 @@ export const copy: Record<Locale, {
     email: string;
     vcard: string;
     portraitAlt: string;
-    now: string;
-    building: string;
-    buildingValue: string;
-    focus: string;
-    focusValue: string;
-    localTime: string;
     metrics: Array<{ value: string; label: string }>;
   };
   work: {
@@ -108,12 +102,6 @@ export const copy: Record<Locale, {
       email: 'Email me',
       vcard: 'Save contact',
       portraitAlt: 'Tarik Ermis, software architect and founder of n3tz',
-      now: 'Now',
-      building: 'Building',
-      buildingValue: 'n3tz · Empfang',
-      focus: 'Current focus',
-      focusValue: 'Voice AI + useful products',
-      localTime: 'Local time',
       metrics: [
         { value: '10+', label: 'years building software' },
         { value: '0→1', label: 'products, not just prototypes' },
@@ -238,12 +226,6 @@ export const copy: Record<Locale, {
       email: 'E-Mail schreiben',
       vcard: 'Kontakt speichern',
       portraitAlt: 'Tarik Ermis, Software-Architekt und Gründer von n3tz',
-      now: 'Gerade',
-      building: 'Ich baue',
-      buildingValue: 'n3tz · Empfang',
-      focus: 'Im Fokus',
-      focusValue: 'Sprach-KI + nützliche Produkte',
-      localTime: 'Ortszeit',
       metrics: [
         { value: '10+', label: 'Jahre Softwareentwicklung' },
         { value: '0→1', label: 'Produkte statt Folien' },

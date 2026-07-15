@@ -6,25 +6,10 @@ const updateHeader = () => header?.classList.toggle('is-scrolled', window.scroll
 updateHeader();
 window.addEventListener('scroll', updateHeader, { passive: true });
 
-const timeNodes = document.querySelectorAll<HTMLElement>('[data-local-time]');
-const updateLocalTime = () => {
-  const formatted = new Intl.DateTimeFormat(document.documentElement.lang || 'en', {
-    timeZone: 'Europe/Berlin',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-    timeZoneName: 'short',
-  }).format(new Date());
-
-  timeNodes.forEach((node) => {
-    node.textContent = formatted;
-  });
-};
-updateLocalTime();
-window.setInterval(updateLocalTime, 30_000);
-
+const currentYear = String(new Date().getFullYear());
 document.querySelectorAll<HTMLElement>('[data-year]').forEach((node) => {
-  node.textContent = String(new Date().getFullYear());
+  node.textContent = currentYear;
+  if (node instanceof HTMLTimeElement) node.dateTime = currentYear;
 });
 
 const revealItems = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
