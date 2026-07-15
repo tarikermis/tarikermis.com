@@ -13,8 +13,8 @@
     "build": "astro build && node scripts/check-site.mjs",
     "preview": "astro preview",
     "check": "astro build && node scripts/check-site.mjs",
-    "cf:dev": "yarn build && wrangler pages dev dist",
-    "deploy": "yarn build && wrangler pages deploy dist --project-name=tarikermis --branch=main"
+    "cf:dev": "yarn build && wrangler dev",
+    "deploy": "yarn build && wrangler deploy"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

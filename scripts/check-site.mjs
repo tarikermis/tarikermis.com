@@ -59,7 +59,7 @@ for (const file of requiredFiles) {
 
 for (const path of allFiles) {
   const size = statSync(path).size;
-  if (size > 25 * 1024 * 1024) fail(`${relative(root, path)} exceeds Cloudflare Pages' 25 MiB file limit`);
+  if (size > 25 * 1024 * 1024) fail(`${relative(root, path)} exceeds Cloudflare Workers' 25 MiB static asset limit`);
 }
 
 for (const path of htmlFiles) {

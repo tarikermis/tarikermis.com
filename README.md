@@ -1,7 +1,6 @@
 # tarikermis.com
 
 [![CI](https://github.com/tarikermis/tarikermis.com/actions/workflows/ci.yml/badge.svg)](https://github.com/tarikermis/tarikermis.com/actions/workflows/ci.yml)
-[![Deploy](https://github.com/tarikermis/tarikermis.com/actions/workflows/deploy.yml/badge.svg)](https://github.com/tarikermis/tarikermis.com/actions/workflows/deploy.yml)
 
 The personal site and selected work of [Tarik Ermis](https://tarikermis.com)—software architect, AI engineer, and founder of [n3tz](https://n3tz.ai).
 
@@ -15,7 +14,7 @@ The personal site and selected work of [Tarik Ermis](https://tarikermis.com)—s
 - Self-hosted fonts, no analytics, no cookies, and no third-party runtime requests
 - Canonical metadata, structured data, sitemap, `robots.txt`, `llms.txt`, and social cards
 - Cloudflare security headers and path redirects
-- Automated checks and Cloudflare Pages deployment from GitHub Actions
+- Automated checks plus native Cloudflare Workers Builds deployment from Git
 
 The site is original work built from scratch with Astro. It does not include the code or template history of the previous portfolio.
 
@@ -35,7 +34,7 @@ yarn build
 yarn run check
 ```
 
-Preview it through the Cloudflare Pages runtime:
+Preview it through the Cloudflare Workers runtime:
 
 ```bash
 yarn cf:dev
@@ -57,9 +56,9 @@ The generated site contains these public routes:
 
 ## Deployment
 
-Production is a static Cloudflare Pages project named `tarikermis`. Pushes to `main` are built and deployed with Wrangler by GitHub Actions.
+Production is a Cloudflare Worker named `tarikermis` with Astro's static output deployed as Workers Static Assets. Cloudflare Workers Builds watches `main`, runs `yarn build`, and deploys with Wrangler. Non-production branches create preview versions without promoting them.
 
-The exact one-time setup for GitHub, Cloudflare Pages, IONOS nameservers, the canonical `.com`, and the three redirect domains is in [`docs/cloudflare-setup.md`](docs/cloudflare-setup.md).
+The exact setup for Workers Builds, IONOS nameservers, the canonical `.com`, and the three redirect domains is in [`docs/cloudflare-setup.md`](docs/cloudflare-setup.md).
 
 ## License
 

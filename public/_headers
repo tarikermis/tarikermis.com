@@ -19,5 +19,8 @@
 /og-image.png
   Cache-Control: public, max-age=86400
 
+https://:worker.tarik-079.workers.dev/*
+  X-Robots-Tag: noindex, nofollow
+
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
