@@ -1,30 +1,39 @@
 # Tarik Ermis
 
-> Freelance practice of Tarik Ermis: AI agents, process automation and company-knowledge assistants for trades and small businesses (KMU), from Völklingen, Saarland, Germany. Founder of n3tz.
+> Freelance practice of Tarik Ermis, software engineer from Völklingen (Saarland, Germany) and founder of n3tz GmbH. He builds AI assistants, process automation and company-knowledge assistants for trade businesses (Handwerk) and small and medium-sized businesses (KMU). Clients approve everything that goes out. Data stays in the EU.
 
-Canonical website: https://tarikermis.com
-English version: https://tarikermis.com/en/
-Résumé: https://techrez.io/resume/tarik-ermis
-GitHub: https://github.com/tarikermis
-LinkedIn: https://www.linkedin.com/in/tarikermis
-Company: https://n3tz.ai
-Contact: mailto:tarik@n3tz.ai
-vCard: https://tarikermis.com/contact.vcf
+Contact: tarik@n3tz.ai, +49 1573 753 22 27. Working languages: German, English, Turkish. On site in Saarland and nearby, otherwise remote.
 
-## Focus
+## Pages
 
-- AI office agents for trades and small businesses: calls, email, quotes, receipts
-- Automation between existing business software, with human approval
-- Company-knowledge assistants that answer from the client's own documents, with sources
-- Websites that bring enquiries; AI training for teams
+- [Startseite (Deutsch)](https://tarikermis.com/): services, case studies, an interactive build plan, process, FAQ and contact
+- [Homepage (English)](https://tarikermis.com/en/): the same content in English
+- [Impressum und Datenschutz](https://tarikermis.com/de/impressum/): legal notice and privacy (German)
+- [Legal notice and privacy](https://tarikermis.com/legal/): legal notice and privacy (English)
+- [Contact card (vCard)](https://tarikermis.com/contact.vcf): phone and email
+
+## Services
+
+- AI assistant for calls and enquiries: picks up when the owner cannot, asks the right questions and sends a callback note
+- Quote drafts from enquiries or site measurements, using the business's own line items and prices
+- Receipt collection and filing, ready for the accountant at month end
+- Connecting existing business software so data is not retyped; failed cases go to a person with the reason
+- Company-knowledge assistant that answers from the business's own documents and names the source
+- Also: websites that bring enquiries, and AI training for teams
 
 ## Case studies
 
-- B2B car dealer (anonymised): purchase bots, CarFleet vehicle tool, Griffi document archive
-- Medivaro Pflege: website and care-box application flow into the billing portal
-- Michael Groß Meisterbetrieb (heating and plumbing): website
-- HaliAvrupa: Shopify shop build
-- Griffi (own product): digital office assistant for trades, https://griffi.ai
-- Global DAX industrial group (freelance): AI platform for 26,000+ governance documents
+- B2B car dealer (anonymised, client since 2024): purchase bots, custom software for processing each vehicle, Griffi document archive
+- [MD Cleaning](https://mdcleaning-saar.de): website for a cleaning and caretaking business in Völklingen
+- [Medivaro Pflege](https://medivaro-pflege.de): website and care-box application flow into the billing portal, with a human check before submission
+- [HaliAvrupa](https://haliavrupa.com): Shopify shop build
+- [Griffi](https://griffi.ai): own product, a digital office assistant for trade businesses
+- Global DAX-listed industrial group (freelance): AI platform for more than 26,000 governance documents, in production since March 2026
 
-This site uses no analytics, advertising, or tracking cookies.
+## Links
+
+- [n3tz](https://n3tz.ai): Tarik's company
+- [LinkedIn](https://www.linkedin.com/in/tarikermis)
+- [GitHub](https://github.com/tarikermis)
+
+This site uses no analytics, advertising or tracking cookies.

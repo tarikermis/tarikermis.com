@@ -39,8 +39,61 @@ const plannerData = {
   },
   email: profile.email,
 };
+const siteUrl = new URL(c.path, Astro.site).href;
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ProfessionalService',
+      '@id': 'https://tarikermis.com/#service',
+      name: 'Tarik Ermis',
+      url: siteUrl,
+      image: 'https://tarikermis.com/assets/tarik-2026-09.webp',
+      description: c.seo.description,
+      email: profile.email,
+      telephone: profile.phoneHref,
+      inLanguage: locale,
+      address: { '@type': 'PostalAddress', addressLocality: 'Völklingen', addressRegion: 'Saarland', addressCountry: 'DE' },
+      areaServed: [
+        { '@type': 'AdministrativeArea', name: 'Saarland' },
+        { '@type': 'Country', name: 'Deutschland' },
+      ],
+      founder: { '@id': 'https://tarikermis.com/#person' },
+      knowsLanguage: ['de', 'en', 'tr'],
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: c.services.title,
+        itemListElement: c.services.items.map((item) => ({
+          '@type': 'Offer',
+          itemOffered: { '@type': 'Service', name: item.title, description: item.text },
+        })),
+      },
+    },
+    {
+      '@type': 'Person',
+      '@id': 'https://tarikermis.com/#person',
+      name: profile.name,
+      url: 'https://tarikermis.com/',
+      image: 'https://tarikermis.com/assets/tarik-2026-09.webp',
+      jobTitle: locale === 'de' ? 'Softwareentwickler, Gründer von n3tz' : 'Software engineer, founder of n3tz',
+      worksFor: { '@type': 'Organization', name: 'n3tz GmbH', url: profile.n3tz },
+      sameAs: [profile.linkedin, profile.github, profile.n3tz],
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${siteUrl}#faq`,
+      mainEntity: c.faq.items.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    },
+  ],
+};
 const mailFallback = `mailto:${profile.email}?subject=${encodeURIComponent(p.mailSubject)}`;
 ---
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
 <div class="pp" data-planner-root>
   <header class="pp-header" data-header>
@@ -72,7 +125,7 @@ const mailFallback = `mailto:${profile.email}?subject=${encodeURIComponent(p.mai
         <h1 id="hero-title">{c.hero.titleBefore}<span class="pp-ink-gradient">{c.hero.titleAccent}</span>{c.hero.titleAfter}</h1>
         <p class="pp-hero__intro">{c.hero.intro}</p>
         <div class="pp-hero__actions">
-          <a class="pp-btn pp-btn--brand" href="#bauplan">{c.hero.primary}</a>
+          <a class="pp-btn pp-btn--primary" href="#bauplan">{c.hero.primary}</a>
           <a class="pp-btn pp-btn--line" href="#referenzen">{c.hero.secondary}</a>
         </div>
         <dl class="pp-proof">
@@ -85,11 +138,8 @@ const mailFallback = `mailto:${profile.email}?subject=${encodeURIComponent(p.mai
         </dl>
       </div>
       <figure class="pp-hero__portrait">
-        <img src="/assets/tarik-2026-09.webp" alt={c.hero.portraitAlt} width="960" height="1200" fetchpriority="high" />
-        <figcaption>
-          <span class="pp-dot" aria-hidden="true"></span>
-          {c.hero.place}
-        </figcaption>
+        <img src="/assets/tarik-2026-09-720.webp" srcset="/assets/tarik-2026-09-480.webp 480w, /assets/tarik-2026-09-720.webp 720w, /assets/tarik-2026-09.webp 960w" sizes="(min-width: 1100px) 420px, (min-width: 800px) 400px, calc(100vw - 32px)" alt={c.hero.portraitAlt} width="960" height="1200" fetchpriority="high" />
+        <figcaption>{c.hero.place}</figcaption>
       </figure>
     </section>
 
@@ -101,15 +151,13 @@ const mailFallback = `mailto:${profile.email}?subject=${encodeURIComponent(p.mai
       <ul class="pp-services">
         {c.services.items.map((item) => (
           <li>
+            <h3>{item.title}</h3>
             <p class="pp-services__scene">{item.scene}</p>
-            <div>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </div>
+            <p class="pp-services__answer">{item.text}</p>
           </li>
         ))}
       </ul>
-      <p class="pp-note">{c.services.extras}</p>
+      <p class="pp-services__extras">{c.services.extras}</p>
     </section>
 
     <section id="referenzen" class="pp-section pp-wrap" aria-labelledby="work-title">
@@ -146,7 +194,7 @@ const mailFallback = `mailto:${profile.email}?subject=${encodeURIComponent(p.mai
           <article id={`case-${item.id}`} class="pp-case">
             {item.image && (
               <a class="pp-case__shot" href={item.link?.href} target="_blank" rel="noopener noreferrer" aria-label={`${item.client}: ${c.work.more}`}>
-                <img src={item.image.src} alt={item.image.alt} width={item.image.width} height={item.image.height} loading="lazy" />
+                <img src={item.image.src} srcset={`${item.image.src.replace('.webp', '-640.webp')} 640w, ${item.image.src} 1280w`} sizes="(min-width: 1100px) 380px, (min-width: 560px) 50vw, 100vw" alt={item.image.alt} width={item.image.width} height={item.image.height} loading="lazy" decoding="async" />
               </a>
             )}
             <p class="pp-case__who"><strong>{item.client}</strong> · {item.sector}</p>
@@ -156,6 +204,7 @@ const mailFallback = `mailto:${profile.email}?subject=${encodeURIComponent(p.mai
               {item.built.map((line) => <li>{line}</li>)}
             </ul>
             <p class="pp-case__result">{item.result}</p>
+            {item.note && <p class="pp-case__note">{item.note}</p>}
             {item.link && <a class="pp-arrow" href={item.link.href} target="_blank" rel="noopener noreferrer">{item.link.label}</a>}
           </article>
         ))}
@@ -259,7 +308,7 @@ const mailFallback = `mailto:${profile.email}?subject=${encodeURIComponent(p.mai
             <strong data-plan-case-client>{defaultCase.client}</strong>
             <em data-plan-case-title>{defaultCase.title}</em>
           </a>
-          <a class="pp-btn pp-btn--brand pp-plan__send" href={mailFallback} data-plan-send>{p.send}</a>
+          <a class="pp-btn pp-btn--primary pp-plan__send" href={mailFallback} data-plan-send>{p.send}</a>
           <p class="pp-plan__hint">{p.sendHint}</p>
         </aside>
       </div>
@@ -321,13 +370,12 @@ const mailFallback = `mailto:${profile.email}?subject=${encodeURIComponent(p.mai
 
     <section id="kontakt" class="pp-contact pp-wrap" aria-labelledby="contact-title">
       <div class="pp-contact__card">
-        <img class="pp-contact__face" src="/assets/tarik-2026-09.webp" alt="" width="960" height="1200" loading="lazy" />
         <div class="pp-contact__copy">
           <h2 id="contact-title">{c.contact.title}</h2>
           <p>{c.contact.text}</p>
           <a class="pp-contact__mail" href={`mailto:${profile.email}`}>{profile.email}</a>
           <div class="pp-contact__actions">
-            <a class="pp-btn pp-btn--brand" href={`mailto:${profile.email}`}>{c.contact.mail}</a>
+            <a class="pp-btn pp-btn--primary" href={`mailto:${profile.email}`}>{c.contact.mail}</a>
             <a class="pp-btn pp-btn--line" href={`tel:${profile.phoneHref}`}>{c.contact.call} · {profile.phone}</a>
             <button class="pp-btn pp-btn--ghost" type="button" data-copy-email={profile.email} data-copied-label={c.contact.copied}>{c.contact.copy}</button>
             <a class="pp-btn pp-btn--ghost" href="/contact.vcf" download>{c.contact.vcard}</a>
@@ -339,8 +387,28 @@ const mailFallback = `mailto:${profile.email}?subject=${encodeURIComponent(p.mai
 
   <footer class="pp-footer">
     <div class="pp-wrap pp-footer__inner">
-      <p>© <span data-year>2026</span> {c.footer.rights} · <a href={profile.n3tz} target="_blank" rel="noopener noreferrer">{c.footer.n3tz}</a></p>
-      <p><a href={c.legalPath}>{c.footer.legal}</a> · <a href={c.alternatePath} hreflang={locale === 'de' ? 'en' : 'de'}>{c.alternateName}</a></p>
+      <div class="pp-card" aria-label={locale === 'de' ? 'Visitenkarte' : 'Business card'}>
+        <div class="pp-card__name">
+          <img src="/assets/n3tz-mark.svg" alt="" width="40" height="40" loading="lazy" />
+          <div>
+            <p class="pp-card__title">Tarik Ermis</p>
+            <p>{locale === 'de' ? 'KI für Handwerk und kleine Betriebe' : 'AI for trades and small businesses'}</p>
+          </div>
+        </div>
+        <address class="pp-card__lines">
+          <a href={`tel:${profile.phoneHref}`}>{profile.phone}</a>
+          <a href={`mailto:${profile.email}`}>{profile.email}</a>
+          <span>n3tz GmbH · Völklingen, Saarland</span>
+        </address>
+      </div>
+      <nav class="pp-footer__links" aria-label={locale === 'de' ? 'Weitere Links' : 'More links'}>
+        <a href={c.legalPath}>{c.footer.legal}</a>
+        <a href={c.alternatePath} hreflang={locale === 'de' ? 'en' : 'de'}>{c.alternateName}</a>
+        <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href={profile.n3tz} target="_blank" rel="noopener noreferrer">n3tz.ai</a>
+        <p>© <span data-year>2026</span> Tarik Ermis</p>
+      </nav>
     </div>
   </footer>
 </div>

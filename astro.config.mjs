@@ -7,15 +7,15 @@ export default defineConfig({
   trailingSlash: 'always',
   compressHTML: true,
   build: {
-    inlineStylesheets: 'auto',
+    inlineStylesheets: 'always',
   },
   integrations: [
     sitemap({
       filter: (page) => !page.endsWith('/404/'),
       customPages: ['https://tarikermis.com/contact.vcf'],
       i18n: {
-        defaultLocale: 'en',
-        locales: { en: 'en', de: 'de' },
+        defaultLocale: 'de',
+        locales: { de: 'de', en: 'en' },
       },
     }),
   ],
