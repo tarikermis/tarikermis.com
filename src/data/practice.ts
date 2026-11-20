@@ -108,8 +108,8 @@ export type Copy = {
   footer: { legal: string; n3tz: string; rights: string };
 };
 
-const portraitAltDe = 'Tarik Ermis im Büro, dunkelblaues Sakko, Arme verschränkt';
-const portraitAltEn = 'Tarik Ermis in the office, navy blazer, arms crossed';
+const portraitAltDe = 'Tarik Ermis in Griffi-Jacke vor einer Baustelle, Arme verschränkt';
+const portraitAltEn = 'Tarik Ermis in a Griffi jacket in front of a building site, arms crossed';
 
 export const plannerMatrix: Record<string, { de: string[]; en: string[]; approve: { de: string; en: string }; caseId: string }> = {
   calls: {
@@ -124,7 +124,7 @@ export const plannerMatrix: Record<string, { de: string[]; en: string[]; approve
       'You get every enquiry as a short note with a callback request. Urgent ones reach your phone right away.',
     ],
     approve: { de: 'Wie sich der Agent vorstellt und was er zusagen darf.', en: 'How the agent introduces itself and what it may promise.' },
-    caseId: 'zohir',
+    caseId: 'autohandel',
   },
   mail: {
     de: [
@@ -200,13 +200,13 @@ export const plannerMatrix: Record<string, { de: string[]; en: string[]; approve
 
 const casesDe: Case[] = [
   {
-    id: 'zohir',
-    client: 'Zohir',
-    sector: 'B2B-Autohandel',
+    id: 'autohandel',
+    client: 'B2B-Autohändler',
+    sector: 'Fahrzeugeinkauf und Weiterverkauf an Händler',
     kind: 'Kunde seit 2025',
     stages: ['Einkauf', 'Abwicklung', 'Ablage'],
-    title: 'Für Zohirs Autohandel baue ich die Software, mit der er Fahrzeuge einkauft und abwickelt.',
-    problem: 'Zohir kauft Fahrzeuge auf den Verkaufsplattformen großer Leasinggesellschaften und verkauft sie an Händler weiter. Gute Fahrzeuge sind dort in Sekunden weg, und jedes gekaufte Auto zieht Papierkram, Fristen und Abstimmung nach sich.',
+    title: 'Für einen B2B-Autohändler baue ich die Software, mit der er Fahrzeuge einkauft und abwickelt.',
+    problem: 'Der Händler kauft Fahrzeuge auf den Verkaufsplattformen großer Leasinggesellschaften und verkauft sie an Händler weiter. Gute Fahrzeuge sind dort in Sekunden weg, und jedes gekaufte Auto zieht Papierkram, Fristen und Abstimmung nach sich.',
     built: [
       'Einkaufs-Bots, die zur Verkaufsöffnung nach seinen Regeln kaufen. Jede Änderung testen wir gemeinsam im echten Kauf.',
       'CarFleet, ein eigenes Werkzeug, in dem jedes Fahrzeug vom Kauf bis zur Übergabe geführt wird. Es hat seine Planner-Listen ersetzt.',
@@ -291,13 +291,13 @@ const casesDe: Case[] = [
 
 const casesEn: Case[] = [
   {
-    id: 'zohir',
-    client: 'Zohir',
-    sector: 'B2B car trade',
+    id: 'autohandel',
+    client: 'B2B car dealer',
+    sector: 'Buying vehicles and reselling them to dealers',
     kind: 'Client since 2025',
     stages: ['Buying', 'Processing', 'Filing'],
-    title: 'For Zohir’s car trading business I build the software he uses to buy and process vehicles.',
-    problem: 'Zohir buys vehicles on the sales platforms of large leasing companies and sells them on to dealers. Good cars are gone within seconds, and every purchase brings paperwork, deadlines and coordination.',
+    title: 'For a B2B car dealer I build the software he uses to buy and process vehicles.',
+    problem: 'The dealer buys vehicles on the sales platforms of large leasing companies and sells them on to dealers. Good cars are gone within seconds, and every purchase brings paperwork, deadlines and coordination.',
     built: [
       'Purchase bots that buy by his rules the moment a sale opens. We test every change together in a real purchase.',
       'CarFleet, a dedicated tool that tracks each vehicle from purchase to handover. It replaced his Planner lists.',

@@ -20,7 +20,7 @@ vCard: https://tarikermis.com/contact.vcf
 
 ## Case studies
 
-- Zohir, B2B car trade: purchase bots, CarFleet vehicle tool, Griffi document archive
+- B2B car dealer (anonymised): purchase bots, CarFleet vehicle tool, Griffi document archive
 - Medivaro Pflege: website and care-box application flow into the billing portal
 - Michael Groß Meisterbetrieb (heating and plumbing): website
 - HaliAvrupa: Shopify shop build
