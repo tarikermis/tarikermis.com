@@ -1,9 +1,9 @@
 # Tarik Ermis
 
-> Personal website and selected work of Tarik Ermis, a software architect, AI engineer, and founder based in Völklingen, Germany.
+> Freelance practice of Tarik Ermis: AI agents, process automation and company-knowledge assistants for trades and small businesses (KMU), from Völklingen, Saarland, Germany. Founder of n3tz.
 
 Canonical website: https://tarikermis.com
-German version: https://tarikermis.com/de/
+English version: https://tarikermis.com/en/
 Résumé: https://techrez.io/resume/tarik-ermis
 GitHub: https://github.com/tarikermis
 LinkedIn: https://www.linkedin.com/in/tarikermis
@@ -13,15 +13,18 @@ vCard: https://tarikermis.com/contact.vcf
 
 ## Focus
 
-- Production conversational AI, RAG, and multi-agent systems
-- Full-stack product engineering across web, mobile, APIs, and data
-- Cloud infrastructure, containers, infrastructure as code, and operations
-- Founder and software architect of n3tz and its AI receptionist product, Empfang
+- AI office agents for trades and small businesses: calls, email, quotes, receipts
+- Automation between existing business software, with human approval
+- Company-knowledge assistants that answer from the client's own documents, with sources
+- Websites that bring enquiries; AI training for teams
 
-## Selected work
+## Case studies
 
-- Empfang by n3tz: real-time AI receptionist for phone and web
-- Enterprise AI systems: document intelligence, retrieval, and agent orchestration
-- Commerce platforms: multi-role marketplaces, payments, localization, realtime order tracking, and performance
+- Zohir, B2B car trade: purchase bots, CarFleet vehicle tool, Griffi document archive
+- Medivaro Pflege: website and care-box application flow into the billing portal
+- Michael Groß Meisterbetrieb (heating and plumbing): website
+- HaliAvrupa: Shopify shop build
+- Griffi (own product): digital office assistant for trades, https://griffi.ai
+- Global DAX industrial group (freelance): AI platform for 26,000+ governance documents
 
 This site uses no analytics, advertising, or tracking cookies.

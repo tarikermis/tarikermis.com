@@ -1,11 +1,11 @@
 ---
-import HomePage from '@/components/HomePage.astro';
-import { copy } from '@/data/content';
+import PracticePage from '@/components/PracticePage.astro';
+import { copy } from '@/data/practice';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
-const c = copy.en;
+const c = copy.de;
 ---
 
-<BaseLayout lang="en" title={c.seo.title} description={c.seo.description} path={c.path} alternatePath={c.alternatePath} profilePage>
-  <HomePage locale="en" />
+<BaseLayout lang="de" title={c.seo.title} description={c.seo.description} path={c.path} alternatePath={c.alternatePath} profilePage skipLabel={c.skip}>
+  <PracticePage locale="de" />
 </BaseLayout>

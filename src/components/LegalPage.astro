@@ -1,6 +1,6 @@
 ---
-import type { Locale } from '@/data/content';
-import { profile } from '@/data/content';
+import type { Locale } from '@/data/practice';
+import { profile } from '@/data/practice';
 import Icon from './Icon.astro';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 
 const { locale } = Astro.props;
 const de = locale === 'de';
-const home = de ? '/de/' : '/';
+const home = de ? '/' : '/en/';
 const alternate = de ? '/legal/' : '/de/impressum/';
 ---
 

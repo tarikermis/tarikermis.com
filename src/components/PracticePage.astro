@@ -1,0 +1,349 @@
+---
+import { copy, plannerMatrix, profile, type Locale } from '@/data/practice';
+import '@/styles/practice.css';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = copy[locale];
+const p = c.planner;
+const defaultTrade = p.trades[0];
+const defaultTask = p.tasks[0];
+const defaultPlan = plannerMatrix[defaultTask.id];
+const casesById = Object.fromEntries(c.work.cases.map((item) => [item.id, item]));
+const defaultCase = casesById[defaultPlan.caseId];
+const [lead, ...rest] = c.work.cases;
+const griffi = c.work.cases.find((item) => item.id === 'griffi')!;
+const sites = rest.filter((item) => item.id !== 'griffi' && item.id !== 'enterprise');
+const enterprise = c.work.cases.find((item) => item.id === 'enterprise')!;
+const plannerData = {
+  matrix: Object.fromEntries(
+    Object.entries(plannerMatrix).map(([key, value]) => [
+      key,
+      { weeks: value[locale], approve: value.approve[locale], caseId: value.caseId },
+    ]),
+  ),
+  cases: Object.fromEntries(c.work.cases.map((item) => [item.id, { client: item.client, title: item.title }])),
+  labels: {
+    subject: p.mailSubject,
+    intro: p.mailIntro,
+    trade: p.mailTrade,
+    task: p.mailTask,
+    tools: p.mailTools,
+    none: p.mailNone,
+    outro: p.mailOutro,
+    weeks: p.weeks,
+    approve: p.approveLabel,
+  },
+  email: profile.email,
+};
+const mailFallback = `mailto:${profile.email}?subject=${encodeURIComponent(p.mailSubject)}`;
+---
+
+<div class="pp" data-planner-root>
+  <header class="pp-header" data-header>
+    <div class="pp-wrap pp-header__inner">
+      <a class="pp-brand" href={c.path} aria-label="Tarik Ermis">
+        <img src="/assets/n3tz-mark.svg" alt="" width="36" height="36" />
+        <span>
+          <strong>Tarik Ermis</strong>
+          <small>{locale === 'de' ? 'KI-Agenten und Automatisierung' : 'AI agents and automation'}</small>
+        </span>
+      </a>
+      <nav class="pp-nav" aria-label={locale === 'de' ? 'Hauptnavigation' : 'Main navigation'}>
+        <a href="#bauplan">{c.nav.plan}</a>
+        <a href="#referenzen">{c.nav.work}</a>
+        <a href="#leistungen">{c.nav.services}</a>
+        <a href="#ablauf">{c.nav.process}</a>
+        <a href="#ueber-mich">{c.nav.about}</a>
+      </nav>
+      <div class="pp-header__actions">
+        <a class="pp-lang" href={c.alternatePath} hreflang={locale === 'de' ? 'en' : 'de'} lang={locale === 'de' ? 'en' : 'de'} aria-label={c.alternateName}>{c.alternateLabel}</a>
+        <a class="pp-btn pp-btn--dark pp-header__cta" href="#kontakt">{c.nav.cta}</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="pp-hero pp-wrap" aria-labelledby="hero-title">
+      <div class="pp-hero__copy">
+        <p class="pp-kicker">{c.hero.kicker}</p>
+        <h1 id="hero-title">{c.hero.titleBefore}<span class="pp-ink-gradient">{c.hero.titleAccent}</span>{c.hero.titleAfter}</h1>
+        <p class="pp-hero__intro">{c.hero.intro}</p>
+        <div class="pp-hero__actions">
+          <a class="pp-btn pp-btn--brand" href="#bauplan">{c.hero.primary}</a>
+          <a class="pp-btn pp-btn--line" href="#referenzen">{c.hero.secondary}</a>
+        </div>
+        <dl class="pp-proof">
+          {c.hero.proof.map((item) => (
+            <div>
+              <dt>{item.value}</dt>
+              <dd>{item.label}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+      <figure class="pp-hero__portrait">
+        <img src="/assets/tarik-office-2026.webp" alt={c.hero.portraitAlt} width="880" height="1531" fetchpriority="high" />
+        <figcaption>
+          <span class="pp-dot" aria-hidden="true"></span>
+          {c.hero.place}
+        </figcaption>
+      </figure>
+    </section>
+
+    <section id="bauplan" class="pp-planner" aria-labelledby="planner-title">
+      <div class="pp-wrap pp-planner__grid">
+        <form class="pp-planner__form" data-planner-form>
+          <h2 id="planner-title">{p.title}</h2>
+          <p class="pp-lead">{p.intro}</p>
+
+          <fieldset>
+            <legend><span>1</span>{p.stepTrade}</legend>
+            <div class="pp-chips">
+              {p.trades.map((option, index) => (
+                <label class="pp-chip">
+                  <input type="radio" name="trade" value={option.id} data-label={option.label} checked={index === 0} />
+                  <span>{option.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span>2</span>{p.stepTask}</legend>
+            <div class="pp-chips">
+              {p.tasks.map((option, index) => (
+                <label class="pp-chip">
+                  <input type="radio" name="task" value={option.id} data-label={option.label} checked={index === 0} />
+                  <span>{option.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span>3</span>{p.stepTools} <em>{p.toolsHint}</em></legend>
+            <div class="pp-chips">
+              {p.tools.map((option) => (
+                <label class="pp-chip pp-chip--check">
+                  <input type="checkbox" name="tools" value={option.id} data-label={option.label} />
+                  <span>{option.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        </form>
+
+        <aside class="pp-plan" aria-live="polite" aria-labelledby="plan-label">
+          <div class="pp-plan__head">
+            <p id="plan-label">{p.resultLabel}</p>
+            <h3 data-plan-title>{defaultTrade.label} · {defaultTask.label}</h3>
+          </div>
+          <ol class="pp-plan__weeks">
+            {defaultPlan[locale].map((text, index) => (
+              <li>
+                <span data-plan-week-label>{p.weeks[index]}</span>
+                <p data-plan-week>{text}</p>
+              </li>
+            ))}
+          </ol>
+          <div class="pp-plan__approve">
+            <span>{p.approveLabel}</span>
+            <p data-plan-approve>{defaultPlan.approve[locale]}</p>
+          </div>
+          <a class="pp-plan__case" href={`#case-${defaultCase.id}`} data-plan-case>
+            <span>{p.caseLabel}</span>
+            <strong data-plan-case-client>{defaultCase.client}</strong>
+            <em data-plan-case-title>{defaultCase.title}</em>
+          </a>
+          <a class="pp-btn pp-btn--brand pp-plan__send" href={mailFallback} data-plan-send>{p.send}</a>
+          <p class="pp-plan__hint">{p.sendHint}</p>
+        </aside>
+      </div>
+      <script type="application/json" data-planner-data set:html={JSON.stringify(plannerData)} />
+    </section>
+
+    <section id="referenzen" class="pp-section pp-wrap" aria-labelledby="work-title">
+      <div class="pp-section__head">
+        <h2 id="work-title">{c.work.title}</h2>
+        <p class="pp-lead">{c.work.intro}</p>
+      </div>
+
+      <article id={`case-${lead.id}`} class="pp-lead-case">
+        <div class="pp-lead-case__copy">
+          <div class="pp-lead-case__meta">
+            <p class="pp-case__who"><strong>{lead.client}</strong> · {lead.sector}</p>
+            <p class="pp-tag">{lead.kind}</p>
+          </div>
+          <h3>{lead.title}</h3>
+          <p class="pp-lead-case__problem">{lead.problem}</p>
+          <p class="pp-lead-case__result"><span class="pp-label">{c.work.result}</span>{lead.result}</p>
+        </div>
+        <div class="pp-flow" aria-label={c.work.built}>
+          <p class="pp-label">{c.work.built}</p>
+          <ol>
+            {lead.built.map((item, index) => (
+              <li>
+                <span class="pp-flow__stage">{lead.stages?.[index]}</span>
+                <p>{item}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </article>
+
+      <div class="pp-cases">
+        {sites.map((item) => (
+          <article id={`case-${item.id}`} class="pp-case">
+            {item.image && (
+              <a class="pp-case__shot" href={item.link?.href} target="_blank" rel="noopener noreferrer" aria-label={`${item.client}: ${c.work.more}`}>
+                <img src={item.image.src} alt={item.image.alt} width={item.image.width} height={item.image.height} loading="lazy" />
+              </a>
+            )}
+            <p class="pp-case__who"><strong>{item.client}</strong> · {item.sector}</p>
+            <h3>{item.title}</h3>
+            <p>{item.problem}</p>
+            <ul class="pp-list pp-list--small">
+              {item.built.map((line) => <li>{line}</li>)}
+            </ul>
+            <p class="pp-case__result">{item.result}</p>
+            {item.link && <a class="pp-arrow" href={item.link.href} target="_blank" rel="noopener noreferrer">{item.link.label}</a>}
+          </article>
+        ))}
+      </div>
+
+      <article id={`case-${griffi.id}`} class="pp-product">
+        <div class="pp-product__copy">
+          <p class="pp-tag pp-tag--brand">{c.work.ownProduct}</p>
+          <h3>{griffi.title}</h3>
+          <p>{griffi.problem}</p>
+          <ul class="pp-list pp-list--small">
+            {griffi.built.map((line) => <li>{line}</li>)}
+          </ul>
+          <p class="pp-case__result">{griffi.result}</p>
+          {griffi.link && <a class="pp-arrow" href={griffi.link.href} target="_blank" rel="noopener noreferrer">{griffi.link.label}</a>}
+        </div>
+        <div class="pp-product__shots">
+          {c.griffiShots.map((shot) => (
+            <img src={shot.src} alt={shot.alt} width={shot.width} height={shot.height} loading="lazy" />
+          ))}
+        </div>
+      </article>
+
+      <article id={`case-${enterprise.id}`} class="pp-enterprise">
+        <div>
+          <p class="pp-case__who"><strong>{enterprise.client}</strong> · {enterprise.kind}</p>
+          <h3>{enterprise.title}</h3>
+        </div>
+        <div>
+          <p>{enterprise.problem}</p>
+          <ul class="pp-list pp-list--small">
+            {enterprise.built.map((line) => <li>{line}</li>)}
+          </ul>
+          <p class="pp-case__result">{enterprise.result}</p>
+        </div>
+      </article>
+    </section>
+
+    <section id="leistungen" class="pp-section pp-wrap" aria-labelledby="services-title">
+      <div class="pp-section__head">
+        <h2 id="services-title">{c.services.title}</h2>
+        <p class="pp-lead">{c.services.intro}</p>
+      </div>
+      <ol class="pp-services">
+        {c.services.items.map((item, index) => (
+          <li>
+            <span class="pp-services__n">{String(index + 1).padStart(2, '0')}</span>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+            <p class="pp-services__ex">{item.example}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section id="ablauf" class="pp-section pp-wrap" aria-labelledby="process-title">
+      <div class="pp-section__head">
+        <h2 id="process-title">{c.process.title}</h2>
+        <p class="pp-lead">{c.process.intro}</p>
+      </div>
+      <ol class="pp-steps">
+        {c.process.steps.map((step, index) => (
+          <li>
+            <span>{index + 1}</span>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </li>
+        ))}
+      </ol>
+      <p class="pp-note">{c.process.pricing}</p>
+    </section>
+
+    <section id="ueber-mich" class="pp-section pp-wrap pp-about" aria-labelledby="about-title">
+      <figure class="pp-about__photo">
+        <img src={c.about.photo.src} alt={c.about.photo.alt} width={c.about.photo.width} height={c.about.photo.height} loading="lazy" />
+        <figcaption>{c.about.photoCredit}</figcaption>
+      </figure>
+      <div class="pp-about__copy">
+        <h2 id="about-title">{c.about.title}</h2>
+        {c.about.paragraphs.map((text) => <p>{text}</p>)}
+        <dl class="pp-facts">
+          {c.about.facts.map((fact) => (
+            <div>
+              <dt>{fact.label}</dt>
+              <dd>{fact.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <div class="pp-about__links">
+          <a class="pp-arrow" href={profile.n3tz} target="_blank" rel="noopener noreferrer">n3tz.ai</a>
+          <a class="pp-arrow" href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a class="pp-arrow" href={profile.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="pp-section pp-wrap pp-faq" aria-labelledby="faq-title">
+      <h2 id="faq-title">{c.faq.title}</h2>
+      <div>
+        {c.faq.items.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section id="kontakt" class="pp-contact pp-wrap" aria-labelledby="contact-title">
+      <div class="pp-contact__card">
+        <img class="pp-contact__face" src="/assets/tarik-office-2026.webp" alt="" width="880" height="1531" loading="lazy" />
+        <div class="pp-contact__copy">
+          <h2 id="contact-title">{c.contact.title}</h2>
+          <p>{c.contact.text}</p>
+          <a class="pp-contact__mail" href={`mailto:${profile.email}`}>{profile.email}</a>
+          <div class="pp-contact__actions">
+            <a class="pp-btn pp-btn--brand" href={`mailto:${profile.email}`}>{c.contact.mail}</a>
+            <a class="pp-btn pp-btn--line" href={`tel:${profile.phoneHref}`}>{c.contact.call} · {profile.phone}</a>
+            <button class="pp-btn pp-btn--ghost" type="button" data-copy-email={profile.email} data-copied-label={c.contact.copied}>{c.contact.copy}</button>
+            <a class="pp-btn pp-btn--ghost" href="/contact.vcf" download>{c.contact.vcard}</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pp-footer">
+    <div class="pp-wrap pp-footer__inner">
+      <p>© <span data-year>2026</span> {c.footer.rights} · <a href={profile.n3tz} target="_blank" rel="noopener noreferrer">{c.footer.n3tz}</a></p>
+      <p><a href={c.legalPath}>{c.footer.legal}</a> · <a href={c.alternatePath} hreflang={locale === 'de' ? 'en' : 'de'}>{c.alternateName}</a></p>
+    </div>
+  </footer>
+</div>
+
+<script>
+  import '@/scripts/practice';
+</script>

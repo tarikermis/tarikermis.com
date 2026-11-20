@@ -1,0 +1,11 @@
+---
+import PracticePage from '@/components/PracticePage.astro';
+import { copy } from '@/data/practice';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const c = copy.en;
+---
+
+<BaseLayout lang="en" title={c.seo.title} description={c.seo.description} path={c.path} alternatePath={c.alternatePath} profilePage skipLabel={c.skip}>
+  <PracticePage locale="en" />
+</BaseLayout>

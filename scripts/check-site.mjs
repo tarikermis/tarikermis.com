@@ -38,7 +38,7 @@ walk(root);
 
 const requiredFiles = [
   'index.html',
-  'de/index.html',
+  'en/index.html',
   'legal/index.html',
   'de/impressum/index.html',
   '404.html',
