@@ -3,7 +3,7 @@ import type { Locale } from '@/data/content';
 import { copy, profile } from '@/data/content';
 import Icon from './Icon.astro';
 import ProjectCard from './ProjectCard.astro';
-import SignalField from './SignalField.astro';
+
 
 interface Props {
   locale: Locale;
@@ -47,7 +47,7 @@ const legalHref = locale === 'de' ? '/de/impressum/' : '/legal/';
   <main id="main">
     <section class="hero section-shell" id="top" aria-labelledby="hero-title">
       <div class="hero__wash" aria-hidden="true"></div>
-      <SignalField />
+
 
       <div class="hero__content" data-reveal>
         <p class="eyebrow hero__eyebrow">
@@ -62,27 +62,15 @@ const legalHref = locale === 'de' ? '/de/impressum/' : '/legal/';
         </h1>
 
         <p class="hero__intro">{c.hero.intro}</p>
-        <p class="hero__signature">“{c.hero.signature}”</p>
+
 
         <div class="hero__actions">
           <a class="button button--primary" href={`mailto:${profile.email}`}>
             <Icon name="mail" size={19} />
             {c.hero.email}
           </a>
-          <a class="button button--secondary" href="/contact.vcf" download="Tarik-Ermis.vcf">
-            <Icon name="download" size={19} />
-            {c.hero.vcard}
-          </a>
+          <a class="button button--secondary" href="#work">{c.nav.work} ↓</a>
         </div>
-
-        <dl class="hero__metrics">
-          {c.hero.metrics.map((metric) => (
-            <div>
-              <dt>{metric.value}</dt>
-              <dd>{metric.label}</dd>
-            </div>
-          ))}
-        </dl>
       </div>
 
       <div class="portrait-stage" data-reveal>
@@ -112,6 +100,31 @@ const legalHref = locale === 'de' ? '/de/impressum/' : '/legal/';
       </a>
     </section>
 
+    <section class="approach-section section-shell" id="approach" aria-labelledby="approach-title">
+      <header class="section-heading" data-reveal>
+        <div>
+          <p class="eyebrow">{c.approach.kicker}</p>
+          <h2 id="approach-title">{c.approach.title}</h2>
+        </div>
+        <div class="section-heading__copy">
+          <p>{c.approach.intro}</p>
+        </div>
+      </header>
+
+      <div class="approach-grid">
+        {c.approach.items.map((item) => (
+          <article class="approach-card" data-reveal>
+            <div class="approach-card__number">{item.number}</div>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+            <span>{item.tools}</span>
+            <a class="service-inquiry" href={`mailto:${profile.email}?subject=${encodeURIComponent(item.title)}`}>{c.hero.email} ↗</a>
+          </article>
+        ))}
+      </div>
+
+    </section>
+
     <section class="work-section" id="work" aria-labelledby="work-title">
       <div class="work-section__glow" aria-hidden="true"></div>
       <div class="section-shell">
@@ -134,35 +147,6 @@ const legalHref = locale === 'de' ? '/de/impressum/' : '/legal/';
               tagsLabel={locale === 'de' ? 'Technologien und Themen' : 'Technologies and themes'}
             />
           ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="approach-section section-shell" id="approach" aria-labelledby="approach-title">
-      <header class="section-heading" data-reveal>
-        <div>
-          <p class="eyebrow">{c.approach.kicker}</p>
-          <h2 id="approach-title">{c.approach.title}</h2>
-        </div>
-        <div class="section-heading__copy">
-          <p>{c.approach.intro}</p>
-        </div>
-      </header>
-
-      <div class="approach-grid">
-        {c.approach.items.map((item) => (
-          <article class="approach-card" data-reveal>
-            <div class="approach-card__number">{item.number}</div>
-            <h3>{item.title}</h3>
-            <p>{item.text}</p>
-            <span>{item.tools}</span>
-          </article>
-        ))}
-      </div>
-
-      <div class="stack-marquee" role="group" aria-label={locale === 'de' ? 'Ausgewählte Technologien' : 'Selected technologies'} data-reveal>
-        <div>
-          <span>Python</span><i></i><span>TypeScript</span><i></i><span>React</span><i></i><span>Vue</span><i></i><span>Astro</span><i></i><span>Node.js</span><i></i><span>PostgreSQL</span><i></i><span>Docker</span><i></i><span>Terraform</span><i></i><span>Cloudflare</span>
         </div>
       </div>
     </section>
@@ -318,3 +302,21 @@ const legalHref = locale === 'de' ? '/de/impressum/' : '/legal/';
 </div>
 
 <script src="../scripts/site.ts"></script>
+
+<style>
+  .site-page { background: #f5f2e9; color: #222d26; }
+  .hero { min-height: auto; padding-block: clamp(4rem, 8vw, 8rem); }
+  .hero__wash, .portrait-stage__halo, .scroll-cue { display: none; }
+  .hero h1, .section-heading h2, .approach-card h3 { font-family: Georgia, serif; font-weight: 400; letter-spacing: -.045em; }
+  .hero h1 { font-size: clamp(3.15rem, 6vw, 6rem); line-height: 1.02; }
+  .hero__eyebrow { color: #35583f; }
+  .portrait-card { transform: none; border-radius: 0; box-shadow: none; }
+  .button--primary { background: #244630; color: white; }
+  .approach-section { border-top: 1px solid #778176; padding-block: clamp(3rem, 6vw, 6rem); }
+  .approach-grid { display: block; }
+  .approach-card { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 1rem 3rem; padding: 2rem 0; border: 0; border-top: 1px solid #a4aa9f; background: transparent; border-radius: 0; box-shadow: none; }
+  .approach-card__number { display: none; }
+  .approach-card h3, .approach-card p, .approach-card span { margin: 0; }
+  .service-inquiry { color: #244630; text-decoration: underline; }
+  @media (max-width: 700px) { .approach-card { grid-template-columns: 1fr; } }
+</style>
