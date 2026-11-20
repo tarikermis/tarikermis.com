@@ -40,7 +40,6 @@ export type Copy = {
   skip: string;
   nav: { plan: string; work: string; services: string; process: string; about: string; cta: string; menu: string };
   hero: {
-    kicker: string;
     titleBefore: string;
     titleAccent: string;
     titleAfter: string;
@@ -80,7 +79,8 @@ export type Copy = {
   services: {
     title: string;
     intro: string;
-    items: Array<{ title: string; text: string; example: string }>;
+    items: Array<{ scene: string; title: string; text: string }>;
+    extras: string;
   };
   process: {
     title: string;
@@ -108,33 +108,33 @@ export type Copy = {
   footer: { legal: string; n3tz: string; rights: string };
 };
 
-const portraitAltDe = 'Tarik Ermis in Griffi-Jacke vor einer Baustelle, Arme verschränkt';
-const portraitAltEn = 'Tarik Ermis in a Griffi jacket in front of a building site, arms crossed';
+const portraitAltDe = 'Tarik Ermis im bordeauxroten T-Shirt im Grünen, Arme verschränkt';
+const portraitAltEn = 'Tarik Ermis in a burgundy T-shirt outdoors, arms crossed';
 
 export const plannerMatrix: Record<string, { de: string[]; en: string[]; approve: { de: string; en: string }; caseId: string }> = {
   calls: {
     de: [
       'Ich höre mir an, welche Anrufe bei dir reinkommen, und schreibe mit dir die Fragen auf, die jeder Anrufer beantworten soll.',
-      'Ein Telefon-Agent nimmt ab, wenn du nicht kannst, stellt diese Fragen und legt jede Anfrage beim richtigen Kunden ab.',
+      'Ein KI-Assistent nimmt ab, wenn du nicht kannst. Er stellt diese Fragen und legt jede Anfrage beim richtigen Kunden ab.',
       'Du bekommst jede Anfrage als kurze Notiz mit Rückrufwunsch. Was dringend ist, landet sofort auf deinem Handy.',
     ],
     en: [
       'I listen to which calls you get and write down with you the questions every caller should answer.',
-      'A phone agent picks up when you cannot, asks those questions and files each enquiry with the right customer.',
+      'An AI assistant picks up when you cannot. It asks those questions and files each enquiry with the right customer.',
       'You get every enquiry as a short note with a callback request. Urgent ones reach your phone right away.',
     ],
-    approve: { de: 'Wie sich der Agent vorstellt und was er zusagen darf.', en: 'How the agent introduces itself and what it may promise.' },
+    approve: { de: 'Wie sich der Assistent vorstellt und was er zusagen darf.', en: 'How the assistant introduces itself and what it may promise.' },
     caseId: 'autohandel',
   },
   mail: {
     de: [
       'Wir gehen zehn echte E-Mails aus deinem Postfach durch und legen fest, welche Arten von Anfragen es gibt.',
-      'Ein Agent liest neue Mails, ordnet sie dem Kunden zu und schreibt einen Antwortentwurf in deinem Ton.',
+      'Ein KI-Assistent liest neue Mails, ordnet sie dem Kunden zu und entwirft eine Antwort in deinem Ton.',
       'Du siehst morgens eine Liste: was erledigt werden kann, was einen Entwurf hat und was du selbst entscheiden musst.',
     ],
     en: [
       'We go through ten real emails from your inbox and agree which kinds of enquiry you get.',
-      'An agent reads new mail, matches it to the customer and drafts a reply in your voice.',
+      'An AI assistant reads new mail, matches it to the customer and drafts a reply in your voice.',
       'Each morning you see one list: what can be closed, what has a draft and what needs your decision.',
     ],
     approve: { de: 'Jede Antwort, bevor sie rausgeht.', en: 'Every reply before it goes out.' },
@@ -157,12 +157,12 @@ export const plannerMatrix: Record<string, { de: string[]; en: string[]; approve
   receipts: {
     de: [
       'Wir schauen, wo deine Belege heute ankommen: Mail, Papier, Fotos vom Handy.',
-      'Ein Agent sammelt sie ein, liest Betrag, Datum und Lieferant und legt sie sortiert ab.',
+      'Ein KI-Assistent sammelt sie ein und liest Betrag, Datum und Lieferant. Dann legt er sie sortiert ab.',
       'Am Monatsende ist der Ordner für das Steuerbüro fertig. Fehlt ein Beleg, siehst du das vorher.',
     ],
     en: [
       'We look at where your receipts arrive today: email, paper, photos on your phone.',
-      'An agent collects them, reads amount, date and supplier and files them in order.',
+      'An AI assistant collects them and reads amount, date and supplier. Then it files them in order.',
       'At month end the folder for your accountant is ready. Missing receipts show up before that.',
     ],
     approve: { de: 'Was an das Steuerbüro geht.', en: 'What goes to your accountant.' },
@@ -206,7 +206,7 @@ const casesDe: Case[] = [
     kind: 'Kunde seit 2025',
     stages: ['Einkauf', 'Abwicklung', 'Ablage'],
     title: 'Für einen B2B-Autohändler baue ich die Software, mit der er Fahrzeuge einkauft und abwickelt.',
-    problem: 'Der Händler kauft Fahrzeuge auf den Verkaufsplattformen großer Leasinggesellschaften und verkauft sie an Händler weiter. Gute Fahrzeuge sind dort in Sekunden weg, und jedes gekaufte Auto zieht Papierkram, Fristen und Abstimmung nach sich.',
+    problem: 'Der Händler kauft Fahrzeuge auf den Verkaufsplattformen großer Leasingfirmen und verkauft sie an Händler weiter. Gute Fahrzeuge sind dort in Sekunden weg, und jedes gekaufte Auto zieht Papierkram, Fristen und Abstimmung nach sich.',
     built: [
       'Einkaufs-Bots, die zur Verkaufsöffnung nach seinen Regeln kaufen. Jede Änderung testen wir gemeinsam im echten Kauf.',
       'CarFleet, ein eigenes Werkzeug, in dem jedes Fahrzeug vom Kauf bis zur Übergabe geführt wird. Es hat seine Planner-Listen ersetzt.',
@@ -219,7 +219,7 @@ const casesDe: Case[] = [
     client: 'Medivaro Pflege',
     sector: 'Pflegehilfsmittel, Oberhausen',
     kind: 'Kundenprojekt',
-    title: 'Neue Website und eine Antragsstrecke, die Pflegebox-Anträge direkt weitergibt.',
+    title: 'Eine neue Website, die Pflegebox-Anträge direkt an das Abrechnungsportal weitergibt.',
     problem: 'Anträge kamen über ein altes WordPress-Formular und mussten von Hand in das Abrechnungsportal übertragen werden.',
     built: [
       'Eine schnelle Website, auf der Angehörige die Pflegebox online beantragen.',
@@ -251,8 +251,8 @@ const casesDe: Case[] = [
     problem: 'Der alte Shop sollte umziehen, ohne dass alte Links ins Leere laufen.',
     built: [
       'Filter, verknüpfte Farbvarianten und eine Galerie, die auf dem Handy wischbar ist.',
-      'Eigene Formulare für Rücksendung, Reklamation, Bewerbung und Kooperation.',
-      'Weiterleitungen von allen alten Adressen.',
+      'Formulare, mit denen Kunden Ware zurückschicken, Mängel melden oder sich bewerben.',
+      'Alte Links führen auf die neuen Seiten.',
     ],
     result: 'Live seit August 2026. HaliAvrupa nennt n3tz auf der eigenen Über-uns-Seite als Umsetzungspartner.',
     image: { src: '/assets/work/haliavrupa.webp', width: 1280, height: 800, alt: 'Kollektionsseite des HaliAvrupa-Shops' },
@@ -266,8 +266,8 @@ const casesDe: Case[] = [
     title: 'Griffi nimmt Anrufe und Anfragen an, legt sie beim Kunden ab und bereitet Angebote vor.',
     problem: 'Meine Mutter arbeitet seit 30 Jahren im Büro eines Handwerksbetriebs. Was dort liegen bleibt, hängt zwischen Telefon, Papier und Programmen.',
     built: [
-      'Telefon, Website-Chat, Postfach und Belege in einer Oberfläche, mit eigenem Sprachagenten.',
-      'Hosting in der EU, Verschlüsselung sensibler Felder, Freigabe vor jedem Versand.',
+      'Telefon, Website-Chat, Postfach und Belege laufen in einem Programm zusammen. Am Telefon spricht ein eigener KI-Assistent.',
+      'Die Daten liegen in der EU, sensible Felder sind verschlüsselt, und nichts geht ohne Freigabe raus.',
       'Selbst entwickelt, von der Telefonanlage bis zur Abrechnung.',
     ],
     result: 'Im täglichen Einsatz bei ersten Handwerks- und Servicebetrieben. Ein Pilotbetrieb hat seine Belegarbeit von rund zwei Stunden auf zehn Minuten gebracht (selbst berichtet, nicht unabhängig gemessen).',
@@ -282,8 +282,8 @@ const casesDe: Case[] = [
     title: 'Eine KI-Plattform, in der Mitarbeitende über 26.000 interne Regelwerke durchsuchen und befragen.',
     problem: 'Richtlinien lagen verteilt in vielen Systemen, doppelt und in verschiedenen Fassungen.',
     built: [
-      'Eigene Idee, eigenes Konzept und eigener Prototyp, als Hauptentwickler bis zum Produktivsystem.',
-      'Nächtlicher Abgleich, KI-Klassifizierung, Dublettenerkennung und ein Chat, der mit Quelle antwortet.',
+      'Idee, Konzept und den ersten Prototyp habe ich selbst entwickelt. Als Hauptentwickler habe ich die Plattform bis in den echten Betrieb gebracht.',
+      'Die Plattform gleicht jede Nacht alle Quellen ab, sortiert die Dokumente und findet doppelte Fassungen. Ein Chat beantwortet Fragen und nennt die Quelle.',
     ],
     result: 'Produktiv seit März 2026. Dieselbe Technik setze ich für kleine Betriebe ein, nur kleiner.',
   },
@@ -357,8 +357,8 @@ const casesEn: Case[] = [
     title: 'Griffi answers calls and enquiries, files them with the customer and prepares quotes.',
     problem: 'My mother has worked in the office of a trade business for 30 years. What piles up there sits between the phone, paper and software.',
     built: [
-      'Phone, website chat, inbox and receipts in one place, with its own voice agent.',
-      'EU hosting, encryption of sensitive fields, approval before anything is sent.',
+      'Phone, website chat, inbox and receipts come together in one program. On the phone, its own AI assistant does the talking.',
+      'Data stays in the EU, sensitive fields are encrypted, and nothing goes out without approval.',
       'Built in-house, from the phone system to billing.',
     ],
     result: 'In daily use at the first trade and service businesses. One pilot business cut its receipt work from about two hours to ten minutes (self-reported, not independently measured).',
@@ -374,7 +374,7 @@ const casesEn: Case[] = [
     problem: 'Policies were spread across many systems, duplicated and in different versions.',
     built: [
       'My own idea, concept and prototype, then lead developer through to production.',
-      'Nightly sync, AI classification, duplicate detection and a chat that answers with its source.',
+      'Every night the platform syncs all sources, sorts the documents and finds duplicate versions. A chat answers questions and names the source.',
     ],
     result: 'In production since March 2026. I use the same technology for small businesses, just smaller.',
   },
@@ -395,11 +395,10 @@ export const copy: Record<Locale, Copy> = {
     skip: 'Zum Inhalt springen',
     nav: { plan: 'Bauplan', work: 'Referenzen', services: 'Leistungen', process: 'Ablauf', about: 'Über mich', cta: 'Projekt anfragen', menu: 'Menü' },
     hero: {
-      kicker: 'Für Handwerk und kleine Betriebe, im Saarland und darüber hinaus',
-      titleBefore: 'Ich baue KI-Helfer, die deinem Betrieb die ',
+      titleBefore: 'Ich baue dir KI, die deinem Betrieb die ',
       titleAccent: 'Büroarbeit',
-      titleAfter: ' abnehmen.',
-      intro: 'Ich bin Tarik, Softwareentwickler und Gründer von n3tz. Ich richte Agenten und Automatisierungen ein, die mit deinen vorhandenen Programmen arbeiten. Was rausgeht, gibst du frei.',
+      titleAfter: ' abnimmt.',
+      intro: 'Ich bin Tarik aus Völklingen und arbeite für Handwerks- und kleine Betriebe. Ein Programm übernimmt dann Anrufe, Mails, Angebote und Belege. Es arbeitet mit deiner Software zusammen. Was rausgeht, gibst du frei.',
       primary: 'Bauplan für meinen Betrieb',
       secondary: 'Referenzen ansehen',
       place: 'Völklingen, Saarland · vor Ort oder remote',
@@ -457,7 +456,7 @@ export const copy: Record<Locale, Copy> = {
     },
     work: {
       title: 'Was ich schon gebaut habe, für wen und mit welchem Ergebnis.',
-      intro: 'Kundenprojekte, mein eigenes Produkt und Konzernarbeit, jeweils mit dem, was belegt ist. Zahlen nenne ich nur, wo es eine Quelle gibt.',
+      intro: 'Hier stehen Kundenprojekte, mein eigenes Produkt und meine Arbeit für einen Konzern. Ich schreibe nur, was belegt ist, und Zahlen nur mit Quelle.',
       built: 'Gebaut',
       result: 'Ergebnis',
       ownProduct: 'Eigenes Produkt',
@@ -470,19 +469,20 @@ export const copy: Record<Locale, Copy> = {
       { src: '/assets/work/griffi-angebot.webp', width: 560, height: 1212, alt: 'Griffi Zentrale: Angebotsentwurf zur Freigabe, Beispieldaten' },
     ],
     services: {
-      title: 'Was ich für dich baue.',
-      intro: 'Jedes Projekt beginnt bei einer Aufgabe, die heute Zeit kostet. Daraus wird ein kleines, klar umrissenes Paket.',
+      title: 'Wo ich dir Arbeit abnehme.',
+      intro: 'Jedes Projekt beginnt bei einer Aufgabe, die dich heute Zeit kostet. Erkennst du eine davon wieder?',
       items: [
-        { title: 'Ein Agent für dein Büro', text: 'Er nimmt Anrufe, Mails und Chat-Anfragen an, legt sie beim Kunden ab und bereitet Antworten oder Angebote vor. Auf Basis von Griffi oder ganz für dich gebaut.', example: 'Beispiel: Anrufe nach Feierabend werden zu Rückrufnotizen mit allen Angaben.' },
-        { title: 'Automatisierung zwischen deinen Programmen', text: 'Wo heute jemand abtippt, reden die Programme direkt miteinander. Fehler landen mit Grund bei der Person, die sie klären kann.', example: 'Beispiel: Ein Website-Antrag wird automatisch zum Vorgang im Fachportal.' },
-        { title: 'Ein Assistent für euer Firmenwissen', text: 'Preise, Abläufe und Regeln an einem Ort. Dein Team fragt, der Assistent antwortet aus euren Unterlagen und zeigt die Quelle.', example: 'Beispiel: Neue Leute finden die Antwort, ohne den Chef anzurufen.' },
-        { title: 'Eine Website, die Anfragen bringt', text: 'Klare Leistungen, Einsatzgebiet und ein direkter Weg zu dir. Gebaut für Google und KI-Suchen, auf Wunsch mit Agent dahinter.', example: 'Beispiel: gross-shk.de für einen SHK-Meisterbetrieb.' },
-        { title: 'Schulung für dein Team', text: 'Dein Team setzt KI an Aufgaben aus eurem Alltag ein und lernt, welche Unterlagen es ihr geben darf und welche nicht.', example: 'Beispiel: ein Tag Praxis mit euren echten Vorlagen.' },
+        { scene: 'Du stehst auf der Baustelle, das Telefon klingelt, und der Anrufer ruft den nächsten Betrieb an.', title: 'Anrufe und Anfragen', text: 'Ein KI-Assistent nimmt ab, wenn du keine Hand frei hast. Er fragt alles, was du für den Rückruf brauchst, und schickt dir eine kurze Notiz. Mails und Chat-Anfragen laufen genauso.' },
+        { scene: 'Abends sitzt du noch am Küchentisch und schreibst Angebote.', title: 'Angebote', text: 'Aus einer Anfrage oder einem Aufmaß entsteht ein Entwurf mit deinen Positionen und Preisen. Du prüfst ihn und schickst ihn ab.' },
+        { scene: 'Am Monatsende suchst du Belege aus Mails, Fotos und Ordnern zusammen.', title: 'Belege', text: 'Ein KI-Assistent sammelt die Belege ein, liest sie und legt sie sortiert ab. Am Monatsende ist der Ordner für das Steuerbüro fertig.' },
+        { scene: 'Jemand tippt dieselben Daten von einem Programm ins nächste.', title: 'Programme verbinden', text: 'Ich verbinde deine Programme, damit die Daten von selbst weiterlaufen. Klappt ein Fall nicht, landet er mit Grund bei der Person, die ihn klären kann.' },
+        { scene: 'Dein Team ruft dich an, weil es einen Preis oder eine Regel nicht findet.', title: 'Firmenwissen', text: 'Preise, Abläufe und Regeln liegen an einem Ort. Dein Team fragt, und der Assistent antwortet aus euren Unterlagen mit Quelle.' },
       ],
+      extras: 'Außerdem baue ich Websites, die Anfragen bringen, und schule dein Team im Umgang mit KI.',
     },
     process: {
       title: 'So läuft ein Projekt mit mir.',
-      intro: 'Ein Ansprechpartner von der ersten Frage bis zum laufenden System. Das bin ich.',
+      intro: 'Von der ersten Frage bis zum laufenden System sprichst du nur mit mir.',
       steps: [
         { title: 'Wir schauen uns einen echten Fall an.', text: 'Vor Ort oder per Video. Du zeigst mir eine Aufgabe, so wie sie heute läuft, mit echten Beispielen.' },
         { title: 'Du bekommst ein schriftliches Angebot.', text: 'Mit Umfang, Ziel, Stunden und Preis. Vorher wird nichts gebaut und nichts berechnet.' },
@@ -494,7 +494,7 @@ export const copy: Record<Locale, Copy> = {
     about: {
       title: 'Nach zehn Jahren Software für große Firmen baue ich sie jetzt für Betriebe wie deinen.',
       paragraphs: [
-        'Ich bin Fachinformatiker und entwickle seit 2016 Software. Zuletzt als Lead Developer in München und als freiberuflicher KI-Entwickler für einen DAX-Konzern, wo ich eine Dokumentenplattform von der Idee bis zum Produktivsystem gebracht habe.',
+        'Ich bin Fachinformatiker und entwickle seit 2016 Software. Zuletzt war ich Lead Developer in München und freiberuflicher KI-Entwickler für einen DAX-Konzern. Dort habe ich eine Plattform für Dokumente von der Idee bis in den echten Betrieb gebracht.',
         'Mit n3tz habe ich in Saarbrücken eine eigene Firma gegründet und Griffi gebaut, die digitale Bürokraft fürs Handwerk. Als Freiberufler bringe ich dieselbe Technik in deinen Betrieb, in Paketen, die zu kleinen Firmen passen.',
         'Ich spreche Deutsch, Englisch und Türkisch. Ich komme vorbei, wenn es hilft, und sonst sehen wir uns per Video.',
       ],
@@ -502,7 +502,7 @@ export const copy: Record<Locale, Copy> = {
       photoCredit: 'Demo Day 2026 · Foto: Viktoriia Karakatsii / SouthWestX',
       facts: [
         { label: 'Firma', value: 'n3tz GmbH, Saarbrücken' },
-        { label: 'Schwerpunkt', value: 'KI-Agenten, Automatisierung, RAG, Sprachagenten' },
+        { label: 'Schwerpunkt', value: 'KI am Telefon, im Postfach und in euren Unterlagen' },
         { label: 'Zuvor', value: 'DAX-Konzern (freiberuflich), elunic AG, LendeXe' },
         { label: 'Sprachen', value: 'Deutsch, Englisch, Türkisch' },
       ],
@@ -542,11 +542,10 @@ export const copy: Record<Locale, Copy> = {
     skip: 'Skip to content',
     nav: { plan: 'Build plan', work: 'Work', services: 'Services', process: 'Process', about: 'About', cta: 'Start a project', menu: 'Menu' },
     hero: {
-      kicker: 'For trades and small businesses in Germany and beyond',
-      titleBefore: 'I build AI assistants that take the ',
+      titleBefore: 'I build AI that takes the ',
       titleAccent: 'office work',
       titleAfter: ' off your business.',
-      intro: 'I’m Tarik, a software engineer and the founder of n3tz. I set up agents and automations that work with the software you already use. You approve what goes out.',
+      intro: 'I’m Tarik from Völklingen in Germany, and I work for trade and small businesses. A program then takes over calls, emails, quotes and receipts. It works with your software. You approve what goes out.',
       primary: 'Build plan for my business',
       secondary: 'See the work',
       place: 'Völklingen, Saarland · on site or remote',
@@ -617,19 +616,20 @@ export const copy: Record<Locale, Copy> = {
       { src: '/assets/work/griffi-angebot.webp', width: 560, height: 1212, alt: 'Griffi: draft quote waiting for approval, sample data' },
     ],
     services: {
-      title: 'What I build for you.',
-      intro: 'Every project starts with one task that costs time today. It becomes a small, clearly scoped package.',
+      title: 'Where I take work off your hands.',
+      intro: 'Every project starts with one task that costs you time today. Do you recognise one of these?',
       items: [
-        { title: 'An agent for your office', text: 'It takes calls, emails and chat enquiries, files them with the customer and prepares replies or quotes. Built on Griffi or entirely for you.', example: 'Example: after-hours calls become callback notes with every detail.' },
-        { title: 'Automation between your programs', text: 'Where someone retypes data today, the programs talk to each other. Failures land, with the reason, with the person who can fix them.', example: 'Example: a website application becomes a case in the industry portal.' },
-        { title: 'An assistant for company knowledge', text: 'Prices, procedures and rules in one place. Your team asks, the assistant answers from your documents and shows the source.', example: 'Example: new staff find the answer without calling the boss.' },
-        { title: 'A website that brings enquiries', text: 'Clear services, service area and a direct way to reach you. Built for Google and AI search, with an agent behind it if you want.', example: 'Example: gross-shk.de for a master plumbing business.' },
-        { title: 'Training for your team', text: 'Your team uses AI on tasks from your own day and learns which documents it may share and which it may not.', example: 'Example: one practical day with your real templates.' },
+        { scene: 'You are on a job, the phone rings, and the caller tries the next business instead.', title: 'Calls and enquiries', text: 'An AI assistant picks up when your hands are full. It asks everything you need for the callback and sends you a short note. Emails and chat enquiries work the same way.' },
+        { scene: 'In the evening you are still at the kitchen table writing quotes.', title: 'Quotes', text: 'An enquiry or a site measurement becomes a draft with your line items and prices. You check it and send it.' },
+        { scene: 'At month end you hunt for receipts in emails, photos and folders.', title: 'Receipts', text: 'Receipts are collected, read and filed in order. At month end the folder for your accountant is ready.' },
+        { scene: 'Someone types the same data from one program into the next.', title: 'Connecting programs', text: 'I connect your programs so the data moves on by itself. If a case fails, it lands, with the reason, with the person who can fix it.' },
+        { scene: 'Your team calls you because they cannot find a price or a rule.', title: 'Company knowledge', text: 'Prices, procedures and rules sit in one place. Your team asks, and the assistant answers from your documents with the source.' },
       ],
+      extras: 'I also build websites that bring enquiries and train your team to use AI.',
     },
     process: {
       title: 'How a project with me runs.',
-      intro: 'One contact from the first question to the running system. That’s me.',
+      intro: 'From the first question to the running system, you only deal with me.',
       steps: [
         { title: 'We look at one real case.', text: 'On site or by video. You show me a task the way it runs today, with real examples.' },
         { title: 'You get a written offer.', text: 'With scope, goal, hours and price. Nothing is built or billed before that.' },
@@ -649,7 +649,7 @@ export const copy: Record<Locale, Copy> = {
       photoCredit: 'Demo Day 2026 · Photo: Viktoriia Karakatsii / SouthWestX',
       facts: [
         { label: 'Company', value: 'n3tz GmbH, Saarbrücken' },
-        { label: 'Focus', value: 'AI agents, automation, RAG, voice agents' },
+        { label: 'Focus', value: 'AI on the phone, in the inbox and in your documents' },
         { label: 'Before', value: 'DAX group (freelance), elunic AG, LendeXe' },
         { label: 'Languages', value: 'German, English, Turkish' },
       ],

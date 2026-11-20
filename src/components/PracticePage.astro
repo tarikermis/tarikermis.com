@@ -49,13 +49,13 @@ const mailFallback = `mailto:${profile.email}?subject=${encodeURIComponent(p.mai
         <img src="/assets/n3tz-mark.svg" alt="" width="36" height="36" />
         <span>
           <strong>Tarik Ermis</strong>
-          <small>{locale === 'de' ? 'KI-Agenten und Automatisierung' : 'AI agents and automation'}</small>
+          <small>{locale === 'de' ? 'KI für Handwerk und kleine Betriebe' : 'AI for trades and small businesses'}</small>
         </span>
       </a>
       <nav class="pp-nav" aria-label={locale === 'de' ? 'Hauptnavigation' : 'Main navigation'}>
-        <a href="#bauplan">{c.nav.plan}</a>
-        <a href="#referenzen">{c.nav.work}</a>
         <a href="#leistungen">{c.nav.services}</a>
+        <a href="#referenzen">{c.nav.work}</a>
+        <a href="#bauplan">{c.nav.plan}</a>
         <a href="#ablauf">{c.nav.process}</a>
         <a href="#ueber-mich">{c.nav.about}</a>
       </nav>
@@ -69,7 +69,6 @@ const mailFallback = `mailto:${profile.email}?subject=${encodeURIComponent(p.mai
   <main id="main">
     <section class="pp-hero pp-wrap" aria-labelledby="hero-title">
       <div class="pp-hero__copy">
-        <p class="pp-kicker">{c.hero.kicker}</p>
         <h1 id="hero-title">{c.hero.titleBefore}<span class="pp-ink-gradient">{c.hero.titleAccent}</span>{c.hero.titleAfter}</h1>
         <p class="pp-hero__intro">{c.hero.intro}</p>
         <div class="pp-hero__actions">
@@ -86,7 +85,7 @@ const mailFallback = `mailto:${profile.email}?subject=${encodeURIComponent(p.mai
         </dl>
       </div>
       <figure class="pp-hero__portrait">
-        <img src="/assets/tarik-2026-10.webp" alt={c.hero.portraitAlt} width="960" height="1200" fetchpriority="high" />
+        <img src="/assets/tarik-2026-09.webp" alt={c.hero.portraitAlt} width="960" height="1200" fetchpriority="high" />
         <figcaption>
           <span class="pp-dot" aria-hidden="true"></span>
           {c.hero.place}
@@ -94,76 +93,23 @@ const mailFallback = `mailto:${profile.email}?subject=${encodeURIComponent(p.mai
       </figure>
     </section>
 
-    <section id="bauplan" class="pp-planner" aria-labelledby="planner-title">
-      <div class="pp-wrap pp-planner__grid">
-        <form class="pp-planner__form" data-planner-form>
-          <h2 id="planner-title">{p.title}</h2>
-          <p class="pp-lead">{p.intro}</p>
-
-          <fieldset>
-            <legend><span>1</span>{p.stepTrade}</legend>
-            <div class="pp-chips">
-              {p.trades.map((option, index) => (
-                <label class="pp-chip">
-                  <input type="radio" name="trade" value={option.id} data-label={option.label} checked={index === 0} />
-                  <span>{option.label}</span>
-                </label>
-              ))}
-            </div>
-          </fieldset>
-
-          <fieldset>
-            <legend><span>2</span>{p.stepTask}</legend>
-            <div class="pp-chips">
-              {p.tasks.map((option, index) => (
-                <label class="pp-chip">
-                  <input type="radio" name="task" value={option.id} data-label={option.label} checked={index === 0} />
-                  <span>{option.label}</span>
-                </label>
-              ))}
-            </div>
-          </fieldset>
-
-          <fieldset>
-            <legend><span>3</span>{p.stepTools} <em>{p.toolsHint}</em></legend>
-            <div class="pp-chips">
-              {p.tools.map((option) => (
-                <label class="pp-chip pp-chip--check">
-                  <input type="checkbox" name="tools" value={option.id} data-label={option.label} />
-                  <span>{option.label}</span>
-                </label>
-              ))}
-            </div>
-          </fieldset>
-        </form>
-
-        <aside class="pp-plan" aria-live="polite" aria-labelledby="plan-label">
-          <div class="pp-plan__head">
-            <p id="plan-label">{p.resultLabel}</p>
-            <h3 data-plan-title>{defaultTrade.label} · {defaultTask.label}</h3>
-          </div>
-          <ol class="pp-plan__weeks">
-            {defaultPlan[locale].map((text, index) => (
-              <li>
-                <span data-plan-week-label>{p.weeks[index]}</span>
-                <p data-plan-week>{text}</p>
-              </li>
-            ))}
-          </ol>
-          <div class="pp-plan__approve">
-            <span>{p.approveLabel}</span>
-            <p data-plan-approve>{defaultPlan.approve[locale]}</p>
-          </div>
-          <a class="pp-plan__case" href={`#case-${defaultCase.id}`} data-plan-case>
-            <span>{p.caseLabel}</span>
-            <strong data-plan-case-client>{defaultCase.client}</strong>
-            <em data-plan-case-title>{defaultCase.title}</em>
-          </a>
-          <a class="pp-btn pp-btn--brand pp-plan__send" href={mailFallback} data-plan-send>{p.send}</a>
-          <p class="pp-plan__hint">{p.sendHint}</p>
-        </aside>
+    <section id="leistungen" class="pp-section pp-wrap" aria-labelledby="services-title">
+      <div class="pp-section__head">
+        <h2 id="services-title">{c.services.title}</h2>
+        <p class="pp-lead">{c.services.intro}</p>
       </div>
-      <script type="application/json" data-planner-data set:html={JSON.stringify(plannerData)} />
+      <ul class="pp-services">
+        {c.services.items.map((item) => (
+          <li>
+            <p class="pp-services__scene">{item.scene}</p>
+            <div>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <p class="pp-note">{c.services.extras}</p>
     </section>
 
     <section id="referenzen" class="pp-section pp-wrap" aria-labelledby="work-title">
@@ -248,21 +194,76 @@ const mailFallback = `mailto:${profile.email}?subject=${encodeURIComponent(p.mai
       </article>
     </section>
 
-    <section id="leistungen" class="pp-section pp-wrap" aria-labelledby="services-title">
-      <div class="pp-section__head">
-        <h2 id="services-title">{c.services.title}</h2>
-        <p class="pp-lead">{c.services.intro}</p>
+    <section id="bauplan" class="pp-planner" aria-labelledby="planner-title">
+      <div class="pp-wrap pp-planner__grid">
+        <form class="pp-planner__form" data-planner-form>
+          <h2 id="planner-title">{p.title}</h2>
+          <p class="pp-lead">{p.intro}</p>
+
+          <fieldset>
+            <legend><span>1</span>{p.stepTrade}</legend>
+            <div class="pp-chips">
+              {p.trades.map((option, index) => (
+                <label class="pp-chip">
+                  <input type="radio" name="trade" value={option.id} data-label={option.label} checked={index === 0} />
+                  <span>{option.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span>2</span>{p.stepTask}</legend>
+            <div class="pp-chips">
+              {p.tasks.map((option, index) => (
+                <label class="pp-chip">
+                  <input type="radio" name="task" value={option.id} data-label={option.label} checked={index === 0} />
+                  <span>{option.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span>3</span>{p.stepTools} <em>{p.toolsHint}</em></legend>
+            <div class="pp-chips">
+              {p.tools.map((option) => (
+                <label class="pp-chip pp-chip--check">
+                  <input type="checkbox" name="tools" value={option.id} data-label={option.label} />
+                  <span>{option.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        </form>
+
+        <aside class="pp-plan" aria-live="polite" aria-labelledby="plan-label">
+          <div class="pp-plan__head">
+            <p id="plan-label">{p.resultLabel}</p>
+            <h3 data-plan-title>{defaultTrade.label} · {defaultTask.label}</h3>
+          </div>
+          <ol class="pp-plan__weeks">
+            {defaultPlan[locale].map((text, index) => (
+              <li>
+                <span data-plan-week-label>{p.weeks[index]}</span>
+                <p data-plan-week>{text}</p>
+              </li>
+            ))}
+          </ol>
+          <div class="pp-plan__approve">
+            <span>{p.approveLabel}</span>
+            <p data-plan-approve>{defaultPlan.approve[locale]}</p>
+          </div>
+          <a class="pp-plan__case" href={`#case-${defaultCase.id}`} data-plan-case>
+            <span>{p.caseLabel}</span>
+            <strong data-plan-case-client>{defaultCase.client}</strong>
+            <em data-plan-case-title>{defaultCase.title}</em>
+          </a>
+          <a class="pp-btn pp-btn--brand pp-plan__send" href={mailFallback} data-plan-send>{p.send}</a>
+          <p class="pp-plan__hint">{p.sendHint}</p>
+        </aside>
       </div>
-      <ol class="pp-services">
-        {c.services.items.map((item, index) => (
-          <li>
-            <span class="pp-services__n">{String(index + 1).padStart(2, '0')}</span>
-            <h3>{item.title}</h3>
-            <p>{item.text}</p>
-            <p class="pp-services__ex">{item.example}</p>
-          </li>
-        ))}
-      </ol>
+      <script type="application/json" data-planner-data set:html={JSON.stringify(plannerData)} />
     </section>
 
     <section id="ablauf" class="pp-section pp-wrap" aria-labelledby="process-title">
@@ -320,7 +321,7 @@ const mailFallback = `mailto:${profile.email}?subject=${encodeURIComponent(p.mai
 
     <section id="kontakt" class="pp-contact pp-wrap" aria-labelledby="contact-title">
       <div class="pp-contact__card">
-        <img class="pp-contact__face" src="/assets/tarik-2026-10.webp" alt="" width="960" height="1200" loading="lazy" />
+        <img class="pp-contact__face" src="/assets/tarik-2026-09.webp" alt="" width="960" height="1200" loading="lazy" />
         <div class="pp-contact__copy">
           <h2 id="contact-title">{c.contact.title}</h2>
           <p>{c.contact.text}</p>
