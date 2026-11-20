@@ -26,9 +26,13 @@
   letter-spacing: -0.02em;
 }
 
-.pp h1,
-.pp h2 {
+.pp h1 {
   text-wrap: balance;
+}
+
+.pp h2,
+.pp h3 {
+  text-wrap: pretty;
 }
 
 .pp p,
@@ -266,7 +270,7 @@
 .pp-section,
 .pp-planner,
 .pp-contact {
-  scroll-margin-top: 72px;
+  scroll-margin-top: calc(-1 * var(--pp-section));
   padding-top: var(--pp-section);
 }
 
@@ -399,7 +403,6 @@
 /* Lead case */
 .pp-lead-case {
   display: grid;
-  scroll-margin-top: 88px;
   gap: 32px;
   padding-block: 28px 40px;
   border-top: 1px solid var(--pp-ink);
@@ -489,7 +492,6 @@
 
 .pp-case {
   display: flex;
-  scroll-margin-top: 88px;
   flex-direction: column;
   gap: 12px;
 }
@@ -533,7 +535,6 @@
 /* Own product */
 .pp-product {
   display: grid;
-  scroll-margin-top: 88px;
   gap: 32px;
   padding-block: 40px;
   border-top: 1px solid var(--pp-line);
@@ -568,7 +569,6 @@
 /* Enterprise */
 .pp-enterprise {
   display: grid;
-  scroll-margin-top: 88px;
   gap: 16px;
   padding-top: 40px;
   border-top: 1px solid var(--pp-line);
