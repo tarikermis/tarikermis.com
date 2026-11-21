@@ -24,6 +24,7 @@ Contact: tarik@n3tz.ai, +49 1573 753 22 27. Working languages: German, English, 
 ## Case studies
 
 - B2B car dealer (anonymised, client since 2024): purchase bots, custom software for processing each vehicle, Griffi document archive
+- [StoreRadar24](https://storeradar24.de): client web app that writes a location report (SWOT, nearby competitors, five fitting uses, sources and dates, PDF) for a German address; development and technical operation by n3tz
 - [MD Cleaning](https://mdcleaning-saar.de): website for a cleaning and caretaking business in Völklingen
 - [Medivaro Pflege](https://medivaro-pflege.de): website and care-box application flow into the billing portal, with a human check before submission
 - [HaliAvrupa](https://haliavrupa.com): Shopify shop build

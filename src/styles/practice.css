@@ -1278,10 +1278,6 @@
     gap: 80px;
   }
 
-  .pp-cases {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
   .pp-steps {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }

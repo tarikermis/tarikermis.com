@@ -194,7 +194,7 @@ const mailFallback = `mailto:${profile.email}?subject=${encodeURIComponent(p.mai
           <article id={`case-${item.id}`} class="pp-case">
             {item.image && (
               <a class="pp-case__shot" href={item.link?.href} target="_blank" rel="noopener noreferrer" aria-label={`${item.client}: ${c.work.more}`}>
-                <img src={item.image.src} srcset={`${item.image.src.replace('.webp', '-640.webp')} 640w, ${item.image.src} 1280w`} sizes="(min-width: 1100px) 380px, (min-width: 560px) 50vw, 100vw" alt={item.image.alt} width={item.image.width} height={item.image.height} loading="lazy" decoding="async" />
+                <img src={item.image.src} srcset={`${item.image.src.replace('.webp', '-640.webp')} 640w, ${item.image.src} 1280w`} sizes="(min-width: 1100px) 560px, (min-width: 560px) 50vw, 100vw" alt={item.image.alt} width={item.image.width} height={item.image.height} loading="lazy" decoding="async" />
               </a>
             )}
             <p class="pp-case__who"><strong>{item.client}</strong> · {item.sector}</p>
